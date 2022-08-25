@@ -29,7 +29,7 @@ program.command('create')
             console.log(chalk.red(`Error: Unsupported argument '${argument}', only 'proto' or 'config' supported.`));
             return;
         }
-        var dir: string = options.dir ? options.dir : "";
+        var dir: string = options.outputDir ? options.outputDir : "";
         dir = path.resolve(process.cwd(), dir);
         var name: string = options.name ? options.name : "";
         if (argument == "proto") {
