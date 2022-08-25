@@ -1,12 +1,27 @@
 {
 	"name": "protobytes",
-	"version": "0.9.0",
+	"version": "0.9.1",
+	"description": "A simplified implementation of serialization and deserialization of binary communication protocols: including runtime dependency libraries for each language and command-line compilation tools for protocol files.",
+	"author": "Auga.L",
+	"license": "MIT",
 	"main": "./out/protobytes.js",
 	"scripts": {
 		"watch": "webpack --watch --progress --config webpack.dev.js",
 		"build": "webpack --progress --config webpack.prod.js",
 		"link": "sudo npm link"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/featherJ/protobytes"
+	},
+	"homepage": "https://github.com/featherJ/protobytes#readme",
+	"keywords": [
+		"protobytes",
+		"protocol",
+		"cli",
+		"bytes",
+		"bytearray"
+	],
 	"bin": {
 		"protobytes": "bin/protobytes.js"
 	},

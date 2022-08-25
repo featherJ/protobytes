@@ -1,4 +1,9 @@
 # ProtoBytes
+
+[![NPM Version](http://img.shields.io/npm/v/protobytes.svg?style=flat)](https://www.npmjs.org/package/protobytes)
+[![Install Size](https://packagephobia.now.sh/badge?p=protobytes)](https://packagephobia.now.sh/result?p=protobytes)
+
+
 ProtoBytes 用于二进制通信协议序列化与反序列化，可用于二进制通信或本地持久化存储等。
 ProtoBytes 由命令行编译工具和相应语言的运行时解析库库组成。
 
@@ -18,9 +23,7 @@ ProtoBytes 由命令行编译工具和相应语言的运行时解析库库组成
 
 通过npm安装：
 ```
-npm install
-npm run build
-npm link
+npm install protobytes -g
 ```
 
 ### 运行时库的安装
