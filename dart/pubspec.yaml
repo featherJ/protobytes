@@ -1,6 +1,6 @@
 name: proto_bytes
 description: A Flutter library for binary protocol serialization and deserialization.
-version: 0.9.0
+version: 0.9.1
 homepage: https://github.com/featherJ/protobytes
 environment:
   sdk: ">=2.17.6 <3.0.0"
