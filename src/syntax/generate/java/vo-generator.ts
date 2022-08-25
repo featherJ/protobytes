@@ -67,9 +67,11 @@ export class JavaVOGenerator extends JavaCodeGenerator implements IBeanCodeGener
         }
 
         this._code += "\n";
-        this._code += this.getDocHelper().getIndent(1) + "public static final " + this._name + " fromBytes(ByteArray bytes) {\n";
+        this._code += this.getDocHelper().getIndent(1) + "public static final " + this._name + " fromBytes(byte[] bytes) {\n";
+        this._code += this.getDocHelper().getIndent(2) +"ByteArray byteArray = new ByteArray(bytes);\n";
+        this._code += this.getDocHelper().getIndent(2) +"byteArray.setPosition(0);\n";
         this._code += this.getDocHelper().getIndent(2) + this._name + " info = new " + this._name + "();\n";
-        this._code += this.getDocHelper().getIndent(2) + "BuffObject buff = (BuffObject) BuffBytesUtil.fromBytes(bytes);\n";
+        this._code += this.getDocHelper().getIndent(2) + "BuffObject buff = (BuffObject) BuffBytesUtil.fromBytes(byteArray);\n";
         this._code += this.getDocHelper().getIndent(2) + "List<IBuffInfo> atts = buff.getAttributes();\n";
         for (var j = 0; j < bean.attList.length; j++) {
             this._code += this.getDocHelper().getIndent(2) + "if (" + j + " < atts.size())\n";
@@ -94,7 +96,7 @@ export class JavaVOGenerator extends JavaCodeGenerator implements IBeanCodeGener
         this._code += this.getDocHelper().getIndent(1) + "}\n";
 
         this._code += "\n";
-        this._code += this.getDocHelper().getIndent(1) + "public static final ByteArray toBytes(" + this._name + " info) {\n";
+        this._code += this.getDocHelper().getIndent(1) + "public static final byte[] toBytes(" + this._name + " info) {\n";
         this._code += this.getDocHelper().getIndent(2) + "BuffObject buff = new BuffObject();\n";
 
         for (j = 0; j < bean.attList.length; j++) {
@@ -113,7 +115,7 @@ export class JavaVOGenerator extends JavaCodeGenerator implements IBeanCodeGener
         }
 
         this._code += this.getDocHelper().getIndent(2) + "ByteArray bytes = BuffBytesUtil.toBytes(buff);\n";
-        this._code += this.getDocHelper().getIndent(2) + "return bytes;\n";
+        this._code += this.getDocHelper().getIndent(2) + "return bytes.getBytes();\n";
         this._code += this.getDocHelper().getIndent(1) + "}\n";
 
         this._code += "}\n";
