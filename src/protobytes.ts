@@ -13,10 +13,15 @@ program
     .description('CLI for compiling proto files to specified languages.')
     .version('0.9.0')
     .on('--help', () => {
-        //TODO 完善格式说明和相关文档
+        console.log('');
         console.log('Examples:');
-        console.log('  $ deploy exec sequential');
-        console.log('  $ deploy exec async');
+        console.log('  $ protobytes -h');
+        console.log('  $ protobytes support');
+        console.log('  $ protobytes create proto -o ./templates');
+        console.log('  $ protobytes create config -o ./templates');
+        console.log('  $ protobytes compile -s ./my-protos -t java -o ./my-generate/java/com/myprotos -p com.myprotos -a MyName -c');
+        console.log('  $ protobytes compile -s ./my-protos -t java -o ./my-generate/java/com/myprotos -p com.myprotos');
+        console.log('  $ protobytes compile -config ./proto-config.json');
     });
 
 program.command('create')
@@ -206,9 +211,7 @@ program.command('support')
     .description('View currently supported languages')
     .action((str, options) => {
         console.log(`Supported: ${chalk.green('Java')}, ${chalk.green('Dart')}`);
-        console.log(`·${chalk.green('Java')}:`);
-        console.log(`TODO 需要添加如何配置java环境的描述`);
-        console.log(`·${chalk.green('Dart')}:`);
-        console.log(`TODO 需要添加如何配置dart环境的描述`);
+        console.log(`·${chalk.green('Java')}: https://github.com/featherJ/protobytes/tree/master/java`);
+        console.log(`·${chalk.green('Dart')}: https://github.com/featherJ/protobytes/tree/master/dart`);
     });
 program.parse();
