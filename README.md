@@ -45,9 +45,12 @@ ProtoBytes 目前还只支持如下语言的实现，对于不同的语言您可
 * `byte`: 8位有符号整数。
 * `short`: 16位有符号整数。
 * `int`: 32位有符号整数。
+* `ubyte`: 8位无符号整数。
+* `ushort`: 16位无符号整数。
+* `uint`: 32位无符号整数。
 * `float`: IEEE 754 单精度（32 位）浮点数。
 * `double`: IEEE 754 双精度（64 位）浮点数。
-* `string`: 一串 UTF-8 字符串，字符串的前缀是 16 位有符号整数表示长度。
+* `string`: 一串 UTF-8 字符串，字符串的前缀是 16 位无符号整数表示长度。
 * `longstring`: 一串 UTF-8 字符串，字符串的前缀是 32 位有符号整数表示长度。
 * `bytes`: 一串二进制数据，前缀是 32 位有符号整数表示长度。
 
@@ -78,9 +81,12 @@ proto的语法很简单，可以参考如下示例文件：
 /// Example information description
 vo ExampleInfo
 {	
-	byte byteProp;				/// Property of byte format. An byte between -128 and 127.
+	byte byteProp;				/// Property of byte format. A 8-bit signed integer between -128 and 127.
 	short shortProp;			/// Property of short format. A 16-bit signed integer between -32768 and 32767.
 	int intProp;				/// Property of int format. A 32-bit signed integer between -2147483648 and 2147483647.
+	ubyte byteProp;				/// Property of byte format. A 8-bit unsigned integer between 0 and 255.
+	ushort shortProp;			/// Property of short format. A 16-bit unsigned integer between 0 and 65535.
+	uint intProp;				/// Property of int format. A 32-bit unsigned integer between 0 and 4294967295.
 	float floatProp;			/// Property of float format. A single-precision (32-bit) floating-point number.
 	double doubleProp;			/// Property of double format. A double-precision (64-bit) floating-point number.
 	bool boolProp;				/// Property of bool format. An 8-bit signed integer
@@ -94,6 +100,9 @@ vo ExampleInfo
 	List<byte> byteListProp;				/// Byte list property.
 	List<short> shortListProp;				/// Short list property.
 	List<int> intListProp;					/// Int list property.
+	List<ubyte> byteListProp;				/// Ubyte list property.
+	List<ushort> shortListProp;				/// Ushort list property.
+	List<uint> intListProp;					/// Uint list property.
 	List<float> floatListProp;				/// Float list property.
 	List<double> doubleListProp;			/// Double list property.
 	List<bool> boolListProp;				/// Bool list property.

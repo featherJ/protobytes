@@ -3,7 +3,7 @@ package com.protobytes.buffers.core;
 import com.protobytes.buffers.BuffType;
 
 /**
- * 8个字节，双精度（64 位）浮点数。
+ * A double-precision (64-bit) floating-point number.
  * 
  * @author Agua.L
  *

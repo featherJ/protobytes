@@ -4,7 +4,7 @@ import com.protobytes.buffers.BuffType;
 import com.protobytes.utils.ByteArray;
 
 /**
- * 4个字节无符号短整型表示长度+实际二进制内容
+ * A bytes from the byte stream. The bytes is assumed to be prefixed with an int indicating the length in bytes.
  * 
  * @author Agua.L
  *

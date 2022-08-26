@@ -297,4 +297,18 @@ class ByteArray extends Object {
       throw Exception("End of file was encountered");
     }
   }
+
+  @override
+  String toString() {
+    String string = "";
+    string += "[";
+    for (int i = 0; i < _bytes.length; i++) {
+      string += _bytes[i].toString();
+      if (i != bytes.length - 1) {
+        string += ",";
+      }
+    }
+    string += "]";
+    return string;
+  }
 }

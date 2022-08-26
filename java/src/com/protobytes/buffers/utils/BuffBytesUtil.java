@@ -14,6 +14,9 @@ import com.protobytes.buffers.core.BuffLongString;
 import com.protobytes.buffers.core.BuffObject;
 import com.protobytes.buffers.core.BuffShort;
 import com.protobytes.buffers.core.BuffString;
+import com.protobytes.buffers.core.BuffUByte;
+import com.protobytes.buffers.core.BuffUInt;
+import com.protobytes.buffers.core.BuffUShort;
 import com.protobytes.buffers.core.commons.IBuffInfo;
 import com.protobytes.buffers.core.commons.IBuffList;
 import com.protobytes.buffers.core.commons.IBuffObject;
@@ -39,14 +42,16 @@ public class BuffBytesUtil {
 		bytes.writeByte((byte) buff.getType());
 
 		// 基本数据类型
-		if (buff.getType() == BuffType.BYTE) {
-			bytes.writeByte((byte) buff.getValue());
-		} else if (buff.getType() == BuffType.SHORT) {
-			bytes.writeShort((short) buff.getValue());
+		if (buff.getType() == BuffType.BYTE || buff.getType() == BuffType.UNSIGNED_BYTE) {
+			bytes.writeByte((int) buff.getValue());
+		} else if (buff.getType() == BuffType.SHORT || buff.getType() == BuffType.UNSIGNED_SHORT) {
+			bytes.writeShort((int) buff.getValue());
 		} else if (buff.getType() == BuffType.INT) {
-			bytes.writeInt(((int) buff.getValue()));
+			bytes.writeInt((int) buff.getValue());
+		} else if (buff.getType() == BuffType.UNSIGNED_INT) {
+			bytes.writeUnsignedInt((long) buff.getValue());
 		} else if (buff.getType() == BuffType.FLOAT) {
-			bytes.writeFloat((float) buff.getValue());
+			bytes.writeFloat((double) buff.getValue());
 		} else if (buff.getType() == BuffType.DOUBLE) {
 			bytes.writeDouble((double) buff.getValue());
 		} else if (buff.getType() == BuffType.STRING) {
@@ -64,14 +69,14 @@ public class BuffBytesUtil {
 			bytes.writeBoolean((Boolean) buff.getValue());
 		} else if (buff.getType() == BuffType.OBJECT) {
 			List<IBuffInfo> atts = ((IBuffObject) buff).getAttributes();
-			bytes.writeShort((short) atts.size());
+			bytes.writeShort(atts.size());
 			for (int i = 0; i < atts.size(); i++) {
 				ByteArray attBytes = BuffBytesUtil.toBytes(atts.get(i));
 				bytes.writeBytes(attBytes, 0, attBytes.getLength());
 			}
 		} else if (buff.getType() == BuffType.LIST) {
 			List<IBuffInfo> items = ((IBuffList) buff).getItems();
-			bytes.writeShort((short) items.size());
+			bytes.writeShort(items.size());
 			for (int i = 0; i < items.size(); i++) {
 				ByteArray itemBytes = BuffBytesUtil.toBytes(items.get(i));
 				bytes.writeBytes(itemBytes, 0, itemBytes.getLength());
@@ -89,17 +94,26 @@ public class BuffBytesUtil {
 	public static IBuffInfo fromBytes(ByteArray bytes) {
 		int i;
 		bytes.setEndian(Endian.LITTLE_ENDIAN);
-		byte type = bytes.readByte();
+		int type = bytes.readByte();
 		IBuffInfo buff = null;
 		if (type == BuffType.BYTE) {
 			buff = new BuffByte();
 			buff.setValue(bytes.readByte());
+		} else if (type == BuffType.UNSIGNED_BYTE) {
+			buff = new BuffUByte();
+			buff.setValue(bytes.readUnsignedByte());
 		} else if (type == BuffType.SHORT) {
 			buff = new BuffShort();
 			buff.setValue(bytes.readShort());
+		} else if (type == BuffType.UNSIGNED_SHORT) {
+			buff = new BuffUShort();
+			buff.setValue(bytes.readUnsignedShort());
 		} else if (type == BuffType.INT) {
 			buff = new BuffInt();
 			buff.setValue(bytes.readInt());
+		} else if (type == BuffType.UNSIGNED_INT) {
+			buff = new BuffUInt();
+			buff.setValue(bytes.readUnsignedInt());
 		} else if (type == BuffType.FLOAT) {
 			buff = new BuffFloat();
 			buff.setValue(bytes.readFloat());
@@ -124,14 +138,14 @@ public class BuffBytesUtil {
 			buff.setValue(bytes.readBoolean());
 		} else if (type == BuffType.OBJECT) {
 			buff = new BuffObject();
-			int attLen = bytes.readShort();
+			int attLen = bytes.readUnsignedShort();
 			for (i = 0; i < attLen; i++) {
 				IBuffInfo att = BuffBytesUtil.fromBytes(bytes);
 				((BuffObject) buff).addAttribute(att);
 			}
 		} else if (type == BuffType.LIST) {
 			buff = new BuffList();
-			short itemLen = bytes.readShort();
+			int itemLen = bytes.readUnsignedShort();
 			for (i = 0; i < itemLen; i++) {
 				IBuffInfo item = BuffBytesUtil.fromBytes(bytes);
 				((BuffList) buff).push(item);

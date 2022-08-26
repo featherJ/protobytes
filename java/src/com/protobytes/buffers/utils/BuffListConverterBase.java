@@ -16,41 +16,79 @@ public class BuffListConverterBase {
 		return _instance;
 	}
 
-	public List<Byte> byteListFromBuff(String key, IBuffInfo buff) {
+	public List<Integer> byteListFromBuff(String key, IBuffInfo buff) {
 		buff.setKey(key);
-		List<Byte> target = new ArrayList<>();
+		List<Integer> target = new ArrayList<>();
 		List<IBuffInfo> items = ((BuffList) buff).getItems();
 		for (IBuffInfo item : items)
 			target.add(BuffConverterBase.getInstance().byteFromBuff("", item));
 		return target;
 	}
 
-	public BuffList byteListToBuff(List<Byte> target, String key) {
+	public BuffList byteListToBuff(List<Integer> target, String key) {
 		if (target == null)
 			target = new ArrayList<>();
 		BuffList buff = new BuffList();
 		buff.setKey(key);
-		for (Byte value : target)
+		for (Integer value : target)
 			buff.push((IBuffInfo) BuffConverterBase.getInstance().byteToBuff(value, ""));
 		return buff;
 	}
 
-	public List<Short> shortListFromBuff(String key, IBuffInfo buff) {
+	public List<Integer> ubyteListFromBuff(String key, IBuffInfo buff) {
 		buff.setKey(key);
-		List<Short> target = new ArrayList<>();
+		List<Integer> target = new ArrayList<>();
+		List<IBuffInfo> items = ((BuffList) buff).getItems();
+		for (IBuffInfo item : items)
+			target.add(BuffConverterBase.getInstance().ubyteFromBuff("", item));
+		return target;
+	}
+
+	public BuffList ubyteListToBuff(List<Integer> target, String key) {
+		if (target == null)
+			target = new ArrayList<>();
+		BuffList buff = new BuffList();
+		buff.setKey(key);
+		for (Integer value : target)
+			buff.push((IBuffInfo) BuffConverterBase.getInstance().ubyteToBuff(value, ""));
+		return buff;
+	}
+
+	public List<Integer> shortListFromBuff(String key, IBuffInfo buff) {
+		buff.setKey(key);
+		List<Integer> target = new ArrayList<>();
 		List<IBuffInfo> items = ((BuffList) buff).getItems();
 		for (IBuffInfo item : items)
 			target.add(BuffConverterBase.getInstance().shortFromBuff("", item));
 		return target;
 	}
 
-	public BuffList shortListToBuff(List<Short> target, String key) {
+	public BuffList shortListToBuff(List<Integer> target, String key) {
 		if (target == null)
 			target = new ArrayList<>();
 		BuffList buff = new BuffList();
 		buff.setKey(key);
-		for (Short value : target)
+		for (Integer value : target)
 			buff.push((IBuffInfo) BuffConverterBase.getInstance().shortToBuff(value, ""));
+		return buff;
+	}
+
+	public List<Integer> ushortListFromBuff(String key, IBuffInfo buff) {
+		buff.setKey(key);
+		List<Integer> target = new ArrayList<>();
+		List<IBuffInfo> items = ((BuffList) buff).getItems();
+		for (IBuffInfo item : items)
+			target.add(BuffConverterBase.getInstance().ushortFromBuff("", item));
+		return target;
+	}
+
+	public BuffList ushortListToBuff(List<Integer> target, String key) {
+		if (target == null)
+			target = new ArrayList<>();
+		BuffList buff = new BuffList();
+		buff.setKey(key);
+		for (Integer value : target)
+			buff.push((IBuffInfo) BuffConverterBase.getInstance().ushortToBuff(value, ""));
 		return buff;
 	}
 
@@ -73,21 +111,40 @@ public class BuffListConverterBase {
 		return buff;
 	}
 
-	public List<Float> floatListFromBuff(String key, IBuffInfo buff) {
+	public List<Long> uintListFromBuff(String key, IBuffInfo buff) {
 		buff.setKey(key);
-		List<Float> target = new ArrayList<>();
+		List<Long> target = new ArrayList<>();
+		List<IBuffInfo> items = ((BuffList) buff).getItems();
+		for (IBuffInfo item : items)
+			target.add(BuffConverterBase.getInstance().uintFromBuff("", item));
+		return target;
+	}
+
+	public BuffList uintListToBuff(List<Long> target, String key) {
+		if (target == null)
+			target = new ArrayList<>();
+		BuffList buff = new BuffList();
+		buff.setKey(key);
+		for (Long value : target)
+			buff.push((IBuffInfo) BuffConverterBase.getInstance().uintToBuff(value, ""));
+		return buff;
+	}
+
+	public List<Double> floatListFromBuff(String key, IBuffInfo buff) {
+		buff.setKey(key);
+		List<Double> target = new ArrayList<>();
 		List<IBuffInfo> items = ((BuffList) buff).getItems();
 		for (IBuffInfo item : items)
 			target.add(BuffConverterBase.getInstance().floatFromBuff("", item));
 		return target;
 	}
 
-	public BuffList floatListToBuff(List<Float> target, String key) {
+	public BuffList floatListToBuff(List<Double> target, String key) {
 		if (target == null)
 			target = new ArrayList<>();
 		BuffList buff = new BuffList();
 		buff.setKey(key);
-		for (Float value : target)
+		for (Double value : target)
 			buff.push((IBuffInfo) BuffConverterBase.getInstance().floatToBuff(value, ""));
 		return buff;
 	}

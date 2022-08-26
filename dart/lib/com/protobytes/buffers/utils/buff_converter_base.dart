@@ -24,6 +24,19 @@ class BuffConverterBase {
     return buff;
   }
 
+  int ubyteFromBuff(String key, IBuffInfo buff) {
+    buff.key = key;
+    int target = buff.value as int;
+    return target;
+  }
+
+  BuffUByte ubyteToBuff(int target, String key) {
+    BuffUByte buff = BuffUByte();
+    buff.key = key;
+    buff.value = target;
+    return buff;
+  }
+
   int shortFromBuff(String key, IBuffInfo buff) {
     buff.key = key;
     int target = buff.value as int;
@@ -37,6 +50,19 @@ class BuffConverterBase {
     return buff;
   }
 
+  int ushortFromBuff(String key, IBuffInfo buff) {
+    buff.key = key;
+    int target = buff.value as int;
+    return target;
+  }
+
+  BuffUShort ushortToBuff(int target, String key) {
+    BuffUShort buff = BuffUShort();
+    buff.key = key;
+    buff.value = target;
+    return buff;
+  }
+
   int intFromBuff(String key, IBuffInfo buff) {
     buff.key = key;
     int target = buff.value as int;
@@ -45,6 +71,19 @@ class BuffConverterBase {
 
   BuffInt intToBuff(int target, String key) {
     BuffInt buff = BuffInt();
+    buff.key = key;
+    buff.value = target;
+    return buff;
+  }
+
+  int uintFromBuff(String key, IBuffInfo buff) {
+    buff.key = key;
+    int target = buff.value as int;
+    return target;
+  }
+
+  BuffUInt uintToBuff(int target, String key) {
+    BuffUInt buff = BuffUInt();
     buff.key = key;
     buff.value = target;
     return buff;

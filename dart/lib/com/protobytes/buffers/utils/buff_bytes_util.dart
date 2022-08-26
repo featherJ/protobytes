@@ -14,12 +14,16 @@ class BuffBytesUtil {
     bytes.writeByte(buff.type);
 
     // 基本数据类型
-    if (buff.type == BuffType.byteType) {
+    if (buff.type == BuffType.byteType ||
+        buff.type == BuffType.unsignedByteType) {
       bytes.writeByte(buff.value as int);
-    } else if (buff.type == BuffType.shortType) {
+    } else if (buff.type == BuffType.shortType ||
+        buff.type == BuffType.unsignedShortType) {
       bytes.writeShort(buff.value as int);
     } else if (buff.type == BuffType.intType) {
       bytes.writeInt(buff.value as int);
+    } else if (buff.type == BuffType.unsignedIntType) {
+      bytes.writeUnsignedInt(buff.value as int);
     } else if (buff.type == BuffType.floatType) {
       bytes.writeFloat(buff.value as double);
     } else if (buff.type == BuffType.doubleType) {
@@ -65,12 +69,21 @@ class BuffBytesUtil {
     if (type == BuffType.byteType) {
       buff = BuffByte();
       buff.value = bytes.readByte();
+    } else if (type == BuffType.unsignedByteType) {
+      buff = BuffUByte();
+      buff.value = bytes.readUnsignedByte();
     } else if (type == BuffType.shortType) {
       buff = BuffShort();
       buff.value = bytes.readShort();
+    } else if (type == BuffType.unsignedShortType) {
+      buff = BuffUShort();
+      buff.value = bytes.readUnsignedShort();
     } else if (type == BuffType.intType) {
       buff = BuffInt();
       buff.value = bytes.readInt();
+    } else if (type == BuffType.unsignedIntType) {
+      buff = BuffUInt();
+      buff.value = bytes.readUnsignedInt();
     } else if (type == BuffType.floatType) {
       buff = BuffFloat();
       buff.value = bytes.readFloat();
@@ -95,14 +108,14 @@ class BuffBytesUtil {
       buff.value = bytes.readBoolean();
     } else if (type == BuffType.objectType) {
       buff = BuffObject();
-      int attLen = bytes.readShort();
+      int attLen = bytes.readUnsignedShort();
       for (i = 0; i < attLen; i++) {
         IBuffInfo att = BuffBytesUtil.fromBytes(bytes);
         (buff as BuffObject).addAttribute(att);
       }
     } else if (type == BuffType.listType) {
       buff = BuffList();
-      int itemLen = bytes.readShort();
+      int itemLen = bytes.readUnsignedShort();
       for (i = 0; i < itemLen; i++) {
         IBuffInfo item = BuffBytesUtil.fromBytes(bytes);
         (buff as BuffList).push(item);

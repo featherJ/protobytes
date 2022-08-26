@@ -30,6 +30,25 @@ class BuffListConverterBase {
     return buff;
   }
 
+  List<int> ubyteListFromBuff(String key, IBuffInfo buff) {
+    buff.key = key;
+    List<int> target = [];
+    List<IBuffInfo> items = (buff as BuffList).items;
+    for (var item in items) {
+      target.add(BuffConverterBase.instance.ubyteFromBuff("", item));
+    }
+    return target;
+  }
+
+  BuffList ubyteListToBuff(List<int> target, String key) {
+    BuffList buff = BuffList();
+    buff.key = key;
+    for (var value in target) {
+      buff.push(BuffConverterBase.instance.ubyteToBuff(value, ""));
+    }
+    return buff;
+  }
+
   List<int> shortListFromBuff(String key, IBuffInfo buff) {
     buff.key = key;
     List<int> target = [];
@@ -49,6 +68,25 @@ class BuffListConverterBase {
     return buff;
   }
 
+  List<int> ushortListFromBuff(String key, IBuffInfo buff) {
+    buff.key = key;
+    List<int> target = [];
+    List<IBuffInfo> items = (buff as BuffList).items;
+    for (var item in items) {
+      target.add(BuffConverterBase.instance.ushortFromBuff("", item));
+    }
+    return target;
+  }
+
+  BuffList ushortListToBuff(List<int> target, String key) {
+    BuffList buff = BuffList();
+    buff.key = key;
+    for (var value in target) {
+      buff.push(BuffConverterBase.instance.ushortToBuff(value, ""));
+    }
+    return buff;
+  }
+
   List<int> intListFromBuff(String key, IBuffInfo buff) {
     buff.key = key;
     List<int> target = [];
@@ -64,6 +102,25 @@ class BuffListConverterBase {
     buff.key = key;
     for (var value in target) {
       buff.push(BuffConverterBase.instance.intToBuff(value, ""));
+    }
+    return buff;
+  }
+
+  List<int> uintListFromBuff(String key, IBuffInfo buff) {
+    buff.key = key;
+    List<int> target = [];
+    List<IBuffInfo> items = (buff as BuffList).items;
+    for (var item in items) {
+      target.add(BuffConverterBase.instance.uintFromBuff("", item));
+    }
+    return target;
+  }
+
+  BuffList uintListToBuff(List<int> target, String key) {
+    BuffList buff = BuffList();
+    buff.key = key;
+    for (var value in target) {
+      buff.push(BuffConverterBase.instance.uintToBuff(value, ""));
     }
     return buff;
   }

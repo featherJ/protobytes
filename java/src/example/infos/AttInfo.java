@@ -16,7 +16,7 @@ public class AttInfo {
 	/**
 	 *  Property of short format. A 16-bit signed integer between -32768 and 32767.
 	 */
-	public short attId = 0;
+	public int attId = 0;
 	/**
 	 *  Property of string format. A UTF-8 string from the byte stream. The string is assumed to be prefixed with an short indicating the length in bytes.
 	 */

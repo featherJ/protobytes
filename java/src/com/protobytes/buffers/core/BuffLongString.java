@@ -3,7 +3,8 @@ package com.protobytes.buffers.core;
 import com.protobytes.buffers.BuffType;
 
 /**
- * 4个字节无符号短整型表示长度+实际字符串内容
+ * A UTF-8 string from the byte stream. The string is assumed to be prefixed
+ * with an int indicating the length in bytes.
  * 
  * @author Agua.L
  *

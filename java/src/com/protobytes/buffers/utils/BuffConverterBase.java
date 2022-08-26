@@ -9,6 +9,9 @@ import com.protobytes.buffers.core.BuffInt;
 import com.protobytes.buffers.core.BuffLongString;
 import com.protobytes.buffers.core.BuffShort;
 import com.protobytes.buffers.core.BuffString;
+import com.protobytes.buffers.core.BuffUByte;
+import com.protobytes.buffers.core.BuffUInt;
+import com.protobytes.buffers.core.BuffUShort;
 import com.protobytes.buffers.core.commons.IBuffInfo;
 import com.protobytes.utils.ByteArray;
 
@@ -27,27 +30,53 @@ public class BuffConverterBase {
 		return _instance;
 	}
 
-	public Byte byteFromBuff(String key, IBuffInfo buff) {
+	public Integer byteFromBuff(String key, IBuffInfo buff) {
 		buff.setKey(key);
-		Byte target = (Byte) buff.getValue();
+		Integer target = (Integer) buff.getValue();
 		return target;
 	}
 
-	public BuffByte byteToBuff(Byte target, String key) {
+	public BuffByte byteToBuff(Integer target, String key) {
 		BuffByte buff = new BuffByte();
 		buff.setKey(key);
 		buff.setValue(target);
 		return buff;
 	}
-
-	public Short shortFromBuff(String key, IBuffInfo buff) {
+	
+	public Integer ubyteFromBuff(String key, IBuffInfo buff) {
 		buff.setKey(key);
-		Short target = (Short) buff.getValue();
+		Integer target = (Integer) buff.getValue();
 		return target;
 	}
 
-	public BuffShort shortToBuff(Short target, String key) {
+	public BuffUByte ubyteToBuff(Integer target, String key) {
+		BuffUByte buff = new BuffUByte();
+		buff.setKey(key);
+		buff.setValue(target);
+		return buff;
+	}
+
+	public Integer shortFromBuff(String key, IBuffInfo buff) {
+		buff.setKey(key);
+		Integer target = (Integer) buff.getValue();
+		return target;
+	}
+
+	public BuffShort shortToBuff(Integer target, String key) {
 		BuffShort buff = new BuffShort();
+		buff.setKey(key);
+		buff.setValue(target);
+		return buff;
+	}
+	
+	public Integer ushortFromBuff(String key, IBuffInfo buff) {
+		buff.setKey(key);
+		Integer target = (Integer) buff.getValue();
+		return target;
+	}
+
+	public BuffUShort ushortToBuff(Integer target, String key) {
+		BuffUShort buff = new BuffUShort();
 		buff.setKey(key);
 		buff.setValue(target);
 		return buff;
@@ -65,14 +94,27 @@ public class BuffConverterBase {
 		buff.setValue(target);
 		return buff;
 	}
-
-	public Float floatFromBuff(String key, IBuffInfo buff) {
+	
+	public Long uintFromBuff(String key, IBuffInfo buff) {
 		buff.setKey(key);
-		Float target = (Float) buff.getValue();
+		Long target = (Long) buff.getValue();
 		return target;
 	}
 
-	public BuffFloat floatToBuff(Float target, String key) {
+	public BuffUInt uintToBuff(Long target, String key) {
+		BuffUInt buff = new BuffUInt();
+		buff.setKey(key);
+		buff.setValue(target);
+		return buff;
+	}
+
+	public Double floatFromBuff(String key, IBuffInfo buff) {
+		buff.setKey(key);
+		Double target = (Double) buff.getValue();
+		return target;
+	}
+
+	public BuffFloat floatToBuff(Double target, String key) {
 		BuffFloat buff = new BuffFloat();
 		buff.setKey(key);
 		buff.setValue(target);

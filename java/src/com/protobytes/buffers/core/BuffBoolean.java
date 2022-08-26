@@ -3,7 +3,7 @@ package com.protobytes.buffers.core;
 import com.protobytes.buffers.BuffType;
 
 /**
- * 1个字节， 真假值
+ * Boolean value with a 8-bit integer
  * 
  * @author Agua.L
  *

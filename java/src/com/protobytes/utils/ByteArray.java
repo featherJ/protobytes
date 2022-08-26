@@ -165,9 +165,10 @@ public class ByteArray {
 	/**
 	 * Reads a signed byte from the byte stream.
 	 * 
-	 * @return An byte between -128 and 127.
+	 * @return A 8-bit signed integer between -128 and 127.
+	 * 
 	 */
-	public byte readByte() {
+	public int readByte() {
 		this.validate(1);
 		byte value = this.bytes.get(this.position);
 		this.position++;
@@ -175,12 +176,22 @@ public class ByteArray {
 	}
 
 	/**
+	 * Reads an unsigned byte from the byte stream.
+	 * 
+	 * @return A 8-bit unsigned integer between 0 and 255.
+	 * 
+	 */
+	public int readUnsignedByte() {
+		return readByte() & 0xff;
+	}
+
+	/**
 	 * Writes a byte to the byte stream.
 	 * 
 	 * @param value A byte value.
 	 */
-	public void writeByte(byte value) {
-		this.set(this.position, value);
+	public void writeByte(int value) {
+		this.set(this.position, (byte) (value & 0xff));
 		this.position++;
 	}
 
@@ -284,13 +295,12 @@ public class ByteArray {
 		this.validate(8);
 		long value = 0;
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
-			for (int i = 7; i >= 0; i--) {
+			for (int i = 0; i < 8; i++) {
 				value <<= 8;
 				value |= (this.bytes.get(this.position + i) & 0xFF);
 			}
-
 		} else {
-			for (int i = 0; i < 8; i++) {
+			for (int i = 7; i >= 0; i--) {
 				value <<= 8;
 				value |= (this.bytes.get(this.position + i) & 0xFF);
 			}
@@ -350,12 +360,12 @@ public class ByteArray {
 		this.validate(4);
 		int value = 0;
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
-			for (int i = 3; i >= 0; i--) {
+			for (int i = 0; i < 4; i++) {
 				value <<= 8;
 				value |= (this.bytes.get(this.position + i) & 0xFF);
 			}
 		} else {
-			for (int i = 0; i < 4; i++) {
+			for (int i = 3; i >= 0; i--) {
 				value <<= 8;
 				value |= (this.bytes.get(this.position + i) & 0xFF);
 			}
@@ -371,12 +381,12 @@ public class ByteArray {
 	 */
 	public void writeInt(int value) {
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
-			for (int i = 0; i < 4; i++) {
+			for (int i = 3; i >= 0; i--) {
 				this.set(this.position + i, (byte) (value & 0xFF));
 				value >>= 8;
 			}
 		} else {
-			for (int i = 3; i >= 0; i--) {
+			for (int i = 0; i < 4; i++) {
 				this.set(this.position + i, (byte) (value & 0xFF));
 				value >>= 8;
 			}
@@ -385,13 +395,31 @@ public class ByteArray {
 	}
 
 	/**
+	 * Reads an unsigned 32-bit integer from the byte stream.
+	 * 
+	 * @return A 32-bit unsigned integer between 0 and 4294967295.
+	 */
+	public long readUnsignedInt() {
+		return ((long) readInt()) & 0xffffffffl;
+	}
+
+	/**
+	 * Writes a 32-bit unsigned integer to the byte stream.
+	 * 
+	 * @param value An unsigned integer to write to the byte stream.
+	 */
+	public void writeUnsignedInt(long value) {
+		writeInt((int) (value & 0xffffffff));
+	}
+
+	/**
 	 * Reads an IEEE 754 single-precision (32-bit) floating-point number from the
 	 * byte stream.
 	 * 
 	 * @return A single-precision (32-bit) floating-point number.
 	 */
-	public float readFloat() {
-		return Float.intBitsToFloat(readInt());
+	public double readFloat() {
+		return (double) Float.intBitsToFloat(readInt());
 	}
 
 	/**
@@ -400,8 +428,8 @@ public class ByteArray {
 	 * 
 	 * @param value A single-precision (32-bit) floating-point number.
 	 */
-	public void writeFloat(float value) {
-		int i = Float.floatToIntBits(value);
+	public void writeFloat(double value) {
+		int i = Float.floatToIntBits((float) value);
 		this.writeInt(i);
 	}
 
@@ -442,16 +470,16 @@ public class ByteArray {
 	 * 
 	 * @return A 16-bit signed integer between -32768 and 32767.
 	 */
-	public short readShort() {
+	public int readShort() {
 		this.validate(2);
 		short value = 0;
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
-			for (int i = 1; i >= 0; i--) {
+			for (int i = 0; i < 2; i++) {
 				value <<= 8;
 				value |= (this.bytes.get(this.position + i) & 0xFF);
 			}
 		} else {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 1; i >= 0; i--) {
 				value <<= 8;
 				value |= (this.bytes.get(this.position + i) & 0xFF);
 			}
@@ -461,19 +489,28 @@ public class ByteArray {
 	}
 
 	/**
+	 * Reads an unsigned 16-bit integer from the byte stream.
+	 * 
+	 * @return A 16-bit unsigned integer between 0 and 65535.
+	 */
+	public int readUnsignedShort() {
+		return readShort() & 0xffff;
+	}
+
+	/**
 	 * Writes a 16-bit integer to the byte stream.
 	 * 
 	 * @param value 32-bit integer, whose low 16 bits are written to the byte
 	 *              stream.
 	 */
-	public void writeShort(short value) {
+	public void writeShort(int value) {
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
-			for (int i = 0; i < 2; i++) {
+			for (int i = 1; i >= 0; i--) {
 				this.set(this.position + i, (byte) (value & 0xFF));
 				value >>= 8;
 			}
 		} else {
-			for (int i = 1; i >= 0; i--) {
+			for (int i = 0; i < 2; i++) {
 				this.set(this.position + i, (byte) (value & 0xFF));
 				value >>= 8;
 			}
@@ -488,7 +525,7 @@ public class ByteArray {
 	 * @return UTF-8 encoded string.
 	 */
 	public String readUTF() {
-		short length = readShort();
+		int length = readUnsignedShort();
 		return this.readMultiByte(length, "UTF-8");
 	}
 
@@ -501,7 +538,7 @@ public class ByteArray {
 	 */
 	public void writeUTF(String value) {
 		byte[] bytes = this.convertStringToBytes(value, "UTF-8");
-		writeShort((short) bytes.length);
+		writeShort(bytes.length);
 		writeBytes(bytes);
 	}
 

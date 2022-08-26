@@ -20,7 +20,7 @@ abstract class BuffBase implements IBuffInfo {
   }
 }
 
-/// 1个字节， 真假值
+/// Boolean value with a 8-bit integer
 class BuffBoolean extends BuffBase {
   bool _value = false;
   @override
@@ -34,7 +34,7 @@ class BuffBoolean extends BuffBase {
   int get type => BuffType.booleanType;
 }
 
-/// 1个字节， 介于-128 和 127 之间的8位带符号整数
+/// A 8-bit signed integer between -128 and 127.
 class BuffByte extends BuffBase {
   int _value = 0;
   @override
@@ -43,7 +43,7 @@ class BuffByte extends BuffBase {
   set value(dynamic value) {
     _value = value as int;
     if (_value < -128 || _value > 127) {
-      print("Warning: BuffByte 的值超出了 -12 8到 127 的范围");
+      print("Warning: BuffByte 的值超出了 -128 到 127 的范围");
     }
   }
 
@@ -51,7 +51,24 @@ class BuffByte extends BuffBase {
   int get type => BuffType.byteType;
 }
 
-/// 2个字节，介于 -32768 和 32767 之间的 16 位带符号整数。
+/// A 8-bit unsigned integer between 0 and 255.
+class BuffUByte extends BuffBase {
+  int _value = 0;
+  @override
+  dynamic get value => _value;
+  @override
+  set value(dynamic value) {
+    _value = value as int;
+    if (_value < 0 || _value > 255) {
+      print("Warning: BuffByte 的值超出了 0 到 255 的范围");
+    }
+  }
+
+  @override
+  int get type => BuffType.byteType;
+}
+
+/// A 16-bit signed integer between -32768 and 32767.
 class BuffShort extends BuffBase {
   int _value = 0;
   @override
@@ -68,7 +85,24 @@ class BuffShort extends BuffBase {
   int get type => BuffType.shortType;
 }
 
-/// 4个字节，介于 -2147483648 和 2147483647 之间的 32 位带符号整数。
+/// A 16-bit unsigned integer between 0 and 65535.
+class BuffUShort extends BuffBase {
+  int _value = 0;
+  @override
+  dynamic get value => _value;
+  @override
+  set value(dynamic value) {
+    _value = value as int;
+    if (_value < 0 || _value > 65535) {
+      print("Warning: BuffShort 的值超出了 0 到 65535 的范围");
+    }
+  }
+
+  @override
+  int get type => BuffType.shortType;
+}
+
+/// A 32-bit signed integer between -2147483648 and 2147483647.
 class BuffInt extends BuffBase {
   int _value = 0;
   @override
@@ -85,7 +119,24 @@ class BuffInt extends BuffBase {
   int get type => BuffType.intType;
 }
 
-/// 4个字节，单精度（32 位）浮点数。
+/// A 32-bit unsigned integer between 0 and 4294967295.
+class BuffUInt extends BuffBase {
+  int _value = 0;
+  @override
+  dynamic get value => _value;
+  @override
+  set value(dynamic value) {
+    _value = value as int;
+    if (_value < 0 || _value > 4294967295) {
+      print("Warning: BuffInt 的值超出了 0 到 4294967295 的范围");
+    }
+  }
+
+  @override
+  int get type => BuffType.intType;
+}
+
+/// A single-precision (32-bit) floating-point number.
 class BuffFloat extends BuffBase {
   double _value = 0;
   @override
@@ -99,7 +150,7 @@ class BuffFloat extends BuffBase {
   int get type => BuffType.floatType;
 }
 
-/// 8个字节，双精度（64 位）浮点数。
+/// A double-precision (64-bit) floating-point number.
 class BuffDouble extends BuffBase {
   double _value = 0;
   @override
@@ -113,7 +164,7 @@ class BuffDouble extends BuffBase {
   int get type => BuffType.doubleType;
 }
 
-/// 4个字节无符号短整型表示长度+实际二进制内容
+/// A bytes from the byte stream. The bytes is assumed to be prefixed with an int indicating the length in bytes.
 class BuffBytes extends BuffBase {
   ByteArray _value = ByteArray();
   @override
@@ -127,7 +178,7 @@ class BuffBytes extends BuffBase {
   int get type => BuffType.bytesType;
 }
 
-/// 2个字节无符号短整型表示长度+实际字符串内容
+/// A UTF-8 string from the byte stream. The string is assumed to be prefixed with an unsigned short indicating the length in bytes.
 class BuffString extends BuffBase {
   String _value = "";
   @override
@@ -141,7 +192,7 @@ class BuffString extends BuffBase {
   int get type => BuffType.stringType;
 }
 
-/// 4个字节无符号短整型表示长度+实际字符串内容
+/// A UTF-8 string from the byte stream. The string is assumed to be prefixed with an int indicating the length in bytes.
 class BuffLongString extends BuffBase {
   String _value = "";
   @override
