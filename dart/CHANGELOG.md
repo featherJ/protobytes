@@ -1,3 +1,7 @@
+## 0.9.2
+
+* Add ubyte, ushort, uint support.
+
 ## 0.9.1
 
 * Optimize the project structure.
