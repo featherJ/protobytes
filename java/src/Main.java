@@ -1,6 +1,7 @@
 import example.infos.AttInfo;
 import example.infos.ExampleInfo;
 
+
 public class Main {
 	public static void main(String[] args) {
 		ExampleInfo info = new ExampleInfo();
@@ -23,9 +24,25 @@ public class Main {
 		info.attInfo1ListProp.add(attInfo);
 
 		byte[] bytes = ExampleInfo.toBytes(info);
-		System.out.println(bytes);
+		System.out.println(log(bytes));
+		
 
 		ExampleInfo info2 = ExampleInfo.fromBytes(bytes);
 		System.out.println(info2);
+		
 	}
+	
+	public static String log(byte[] bytes) {
+		String string = "";
+		string += "[";
+		for (int i = 0; i < bytes.length; i++) {
+			string += bytes[i];
+			if (i != bytes.length - 1) {
+				string += ",";
+			}
+		}
+		string += "]";
+		return string;
+	}
+	
 }

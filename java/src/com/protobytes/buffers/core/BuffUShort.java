@@ -22,6 +22,6 @@ public class BuffUShort extends BuffBase {
 	}
 
 	public int getType() {
-		return BuffType.SHORT;
+		return BuffType.UNSIGNED_SHORT;
 	}
 }

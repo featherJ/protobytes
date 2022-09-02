@@ -1,8 +1,6 @@
 package com.protobytes.utils;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The ByteArray class provides methods and properties to optimize reading,
@@ -12,40 +10,31 @@ import java.util.List;
  *
  */
 public class ByteArray {
-	private List<Byte> bytes;
+	private ByteList byteList;
 
 	private int position = 0;
 	private String endian = Endian.BIG_ENDIAN;
 
 	public ByteArray() {
-		this.bytes = new ArrayList<>();
+		byteList = new ByteList(20000);
 	}
 
 	public ByteArray(byte[] bytes) {
-		this.bytes = new ArrayList<>();
-		for (int i = 0; i < bytes.length; i++) {
-			this.bytes.add(bytes[i]);
-		}
+		byteList = new ByteList(bytes, 20000);
 	}
 
 	/**
 	 * The length of the ByteArray object, in bytes.
 	 */
 	public int getLength() {
-		return this.bytes.size();
+		return byteList.getLength();
 	}
 
 	/**
 	 * The length of the ByteArray object, in bytes.
 	 */
 	public void setLength(int length) {
-		if (length > this.bytes.size()) {
-			for (int i = this.bytes.size() - 1; i < length; i++) {
-				this.bytes.add((byte) 0);
-			}
-		} else if (length < this.bytes.size()) {
-			this.bytes = this.bytes.subList(0, length);
-		}
+		byteList.setLength(length);
 		if (this.position > length) {
 			this.position = length;
 		}
@@ -55,7 +44,7 @@ public class ByteArray {
 	 * Get value at specified position;
 	 */
 	public byte get(int index) {
-		return ((Byte) this.bytes.get(index)).byteValue();
+		return byteList.get(index);
 	}
 
 	/**
@@ -65,15 +54,7 @@ public class ByteArray {
 	 * @param element
 	 */
 	public void set(int index, byte element) {
-		if (index < this.bytes.size()) {
-			this.bytes.set(index, element);
-		} else {
-			int offset = index - this.bytes.size();
-			for (int i = 0; i < offset; i++) {
-				this.bytes.add((byte) 0);
-			}
-			this.bytes.add(element);
-		}
+		byteList.set(index, element);
 	}
 
 	/**
@@ -113,20 +94,12 @@ public class ByteArray {
 	 * the ByteArray object.
 	 */
 	public void setPosition(int position) {
-		if (position > this.bytes.size()) {
-			for (int i = this.bytes.size() - 1; i < position; i++) {
-				this.bytes.add(Byte.valueOf((byte) 0));
-			}
-		}
+		byteList.ensure(position);
 		this.position = position;
 	}
 
 	public byte[] getBytes() {
-		byte[] bytes = new byte[this.bytes.size()];
-		for (int i = 0; i < this.bytes.size(); i++) {
-			bytes[i] = this.bytes.get(i);
-		}
-		return bytes;
+		return byteList.toBytes();
 	}
 
 	/**
@@ -134,7 +107,7 @@ public class ByteArray {
 	 * properties to 0.
 	 */
 	public void clear() {
-		this.bytes = new ArrayList<>();
+		byteList.clear();
 		this.position = 0;
 	}
 
@@ -145,7 +118,7 @@ public class ByteArray {
 	 */
 	public boolean readBoolean() {
 		this.validate(1);
-		byte value = this.bytes.get(this.position).byteValue();
+		byte value = get(this.position);
 		this.position++;
 		return value != 0;
 	}
@@ -170,7 +143,7 @@ public class ByteArray {
 	 */
 	public int readByte() {
 		this.validate(1);
-		byte value = this.bytes.get(this.position);
+		byte value = get(this.position);
 		this.position++;
 		return value;
 	}
@@ -213,9 +186,7 @@ public class ByteArray {
 			length = this.getBytesAvailable();
 		}
 		byte[] sourceBytes = this.readBytes(length);
-		for (int i = 0; i < sourceBytes.length; i++) {
-			bytes.set(offset + i, sourceBytes[i]);
-		}
+		bytes.byteList.setRange(offset, sourceBytes);
 	}
 
 	/**
@@ -259,9 +230,8 @@ public class ByteArray {
 		} else {
 			writeLength = Math.min(bytes.getLength() - offset, length);
 		}
-		for (int i = offset; i < offset + writeLength; i++) {
-			this.writeByte(bytes.get(i));
-		}
+		byte[] sourceBytes = bytes.byteList.getRange(offset, writeLength);
+		writeBytes(sourceBytes);
 	}
 
 	/**
@@ -297,12 +267,12 @@ public class ByteArray {
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
 			for (int i = 0; i < 8; i++) {
 				value <<= 8;
-				value |= (this.bytes.get(this.position + i) & 0xFF);
+				value |= (this.get(this.position + i) & 0xFF);
 			}
 		} else {
 			for (int i = 7; i >= 0; i--) {
 				value <<= 8;
-				value |= (this.bytes.get(this.position + i) & 0xFF);
+				value |= (this.get(this.position + i) & 0xFF);
 			}
 		}
 		this.position += 8;
@@ -362,12 +332,12 @@ public class ByteArray {
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
 			for (int i = 0; i < 4; i++) {
 				value <<= 8;
-				value |= (this.bytes.get(this.position + i) & 0xFF);
+				value |= (this.get(this.position + i) & 0xFF);
 			}
 		} else {
 			for (int i = 3; i >= 0; i--) {
 				value <<= 8;
-				value |= (this.bytes.get(this.position + i) & 0xFF);
+				value |= (this.get(this.position + i) & 0xFF);
 			}
 		}
 		this.position += 4;
@@ -476,12 +446,12 @@ public class ByteArray {
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
 			for (int i = 0; i < 2; i++) {
 				value <<= 8;
-				value |= (this.bytes.get(this.position + i) & 0xFF);
+				value |= (this.get(this.position + i) & 0xFF);
 			}
 		} else {
 			for (int i = 1; i >= 0; i--) {
 				value <<= 8;
-				value |= (this.bytes.get(this.position + i) & 0xFF);
+				value |= (this.get(this.position + i) & 0xFF);
 			}
 		}
 		this.position += 2;
@@ -566,20 +536,15 @@ public class ByteArray {
 		this.writeBytes(bytes);
 	}
 
-	private byte[] readBytes(int length) {
+	public byte[] readBytes(int length) {
 		this.validate(length);
-		byte[] bytes = new byte[length];
-		for (int i = 0; i < length; i++) {
-			bytes[i] = this.bytes.get(this.position + i);
-		}
+		byte[] bytes = byteList.getRange(position, length);
 		this.position += length;
 		return bytes;
 	}
 
-	private void writeBytes(byte[] bytes) {
-		for (byte i = 0; i < bytes.length; i++) {
-			this.set(this.position + i, bytes[i]);
-		}
+	public void writeBytes(byte[] bytes) {
+		byteList.setRange(position, bytes);
 		this.position += bytes.length;
 	}
 
@@ -605,7 +570,7 @@ public class ByteArray {
 	}
 
 	private boolean validate(int len) {
-		int bl = this.bytes.size();
+		int bl = byteList.getLength();
 		if (bl > 0 && this.position + len <= bl) {
 			return true;
 		} else {
@@ -616,9 +581,9 @@ public class ByteArray {
 	public String toString() {
 		String string = "";
 		string += "[";
-		for (int i = 0; i < bytes.size(); i++) {
-			string += bytes.get(i);
-			if (i != bytes.size() - 1) {
+		for (int i = 0; i < byteList.getLength(); i++) {
+			string += byteList.get(i);
+			if (i != byteList.getLength() - 1) {
 				string += ",";
 			}
 		}

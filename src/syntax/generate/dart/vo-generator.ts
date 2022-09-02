@@ -15,9 +15,11 @@ export class DartVOGenerator extends DartCodeGenerator implements IBeanCodeGener
             this._packageLib + "buffers/core/buffs.dart",
             this._packageLib + "buffers/utils/buff_bytes_util.dart",
             this._packageLib + "utils/byte_array.dart",
-            this._packageDes + "utils/buff_converter.dart"
         ];
-        if(this.checkHasList(bean)){
+        if(this.containNormal(bean)){
+            imports.push( this._packageDes + "utils/buff_converter.dart");
+        }
+        if(this.containList(bean)){
             imports.push( this._packageDes + "utils/buff_list_converter.dart");
         }
         var customTypesMap: { [type: string]: boolean } = {};
@@ -138,12 +140,23 @@ export class DartVOGenerator extends DartCodeGenerator implements IBeanCodeGener
         return false;
     }
 
-    private checkHasList(bean: BeanNode): boolean {
+    private containList(bean: BeanNode): boolean {
         for (var i = 0; i < bean.attList.length; i++) {
             if (bean.attList[i].isList) {
                 return true;
             }
         }
         return false;
+    }
+
+    private containNormal(bean: BeanNode): boolean {
+        var hasNormal = false;
+            for (var i = 0; i < bean.attList.length; i++) {
+                if (!bean.attList[i].isList) {
+                    hasNormal = true;
+                    break;
+                }
+            }
+        return hasNormal;
     }
 }

@@ -28,7 +28,7 @@ public class BuffObject extends BuffBase implements IBuffObject {
 	public String toString() {
 		String str = "";
 		str += "(" + BuffType.getTypeName(this.getType()) + ")" + this.getKey() + "{\n";
-		for (var i = 0; i < this.attributes.size(); i++) {
+		for (int i = 0; i < this.attributes.size(); i++) {
 			str += BuffLogUtil.formatLog(this.attributes.get(i).toString(), 1);
 		}
 		str += "}";

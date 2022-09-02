@@ -65,7 +65,7 @@ class BuffUByte extends BuffBase {
   }
 
   @override
-  int get type => BuffType.byteType;
+  int get type => BuffType.unsignedByteType;
 }
 
 /// A 16-bit signed integer between -32768 and 32767.
@@ -99,7 +99,7 @@ class BuffUShort extends BuffBase {
   }
 
   @override
-  int get type => BuffType.shortType;
+  int get type => BuffType.unsignedShortType;
 }
 
 /// A 32-bit signed integer between -2147483648 and 2147483647.
@@ -133,7 +133,7 @@ class BuffUInt extends BuffBase {
   }
 
   @override
-  int get type => BuffType.intType;
+  int get type => BuffType.unsignedIntType;
 }
 
 /// A single-precision (32-bit) floating-point number.

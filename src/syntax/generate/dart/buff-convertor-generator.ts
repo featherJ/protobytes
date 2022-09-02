@@ -12,11 +12,13 @@ export class DartBuffConvertorGenerator extends DartCodeGenerator implements IBe
         var imports = [
             this._packageLib + "buffers/core/buffs.dart",
             this._packageLib + "buffers/core/i_buff_info.dart",
-            this._packageLib + "buffers/utils/buff_converter_base.dart",
-            this._packageDes+"utils/buff_list_converter.dart"
+            this._packageLib + "buffers/utils/buff_converter_base.dart"
         ];
+        if (this.containList(beans)) {
+            imports.push(this._packageDes + "utils/buff_list_converter.dart");
+        }
 
-        for (var i = 0; i <beans.length; i++) {
+        for (var i = 0; i < beans.length; i++) {
             var name = getConstLowerStr(beans[i].name);
             imports.push(this._packageDes + "infos/" + name + ".dart");
         }
@@ -29,14 +31,14 @@ export class DartBuffConvertorGenerator extends DartCodeGenerator implements IBe
 
         this._code += "class " + className + " extends BuffConverterBase {\n";
 
-        this._code += this.getDocHelper().getIndent(1) + "static "+className+"? _instance;\n"
-        this._code += this.getDocHelper().getIndent(1) + "static "+className+" get instance {\n"
-        this._code += this.getDocHelper().getIndent(2) + "_instance ??= "+className+"();\n"
+        this._code += this.getDocHelper().getIndent(1) + "static " + className + "? _instance;\n"
+        this._code += this.getDocHelper().getIndent(1) + "static " + className + " get instance {\n"
+        this._code += this.getDocHelper().getIndent(2) + "_instance ??= " + className + "();\n"
         this._code += this.getDocHelper().getIndent(2) + "return _instance!;\n"
         this._code += this.getDocHelper().getIndent(1) + "}\n"
         this._code += "\n";
 
-        
+
 
         for (var i = 0; i < beans.length; i++) {
             var attList: AttributeNode[] = beans[i].attList;
@@ -61,9 +63,9 @@ export class DartBuffConvertorGenerator extends DartCodeGenerator implements IBe
             this._code += this.getDocHelper().getIndent(2) + beans[i].name.charAt(0).toLocaleUpperCase() + beans[i].name.slice(1) + " target = " +
                 beans[i].name.charAt(0).toLocaleUpperCase() + beans[i].name.slice(1) + "();\n"
             for (var j = 0; j < attList.length; j++) {
-                if(j == 0){
+                if (j == 0) {
                     this._code += this.getDocHelper().getIndent(2) + "if (atts.isNotEmpty) {\n";
-                }else{
+                } else {
                     this._code += this.getDocHelper().getIndent(2) + "if (" + j + " < atts.length) {\n";
                 }
                 if (this.getTypeConvertor().hasType(attList[j].type)) {
@@ -123,8 +125,24 @@ export class DartBuffConvertorGenerator extends DartCodeGenerator implements IBe
             this._code += this.getDocHelper().getIndent(1) + "}\n"
             this._code += "\n";
         }
-          
-          
+
+
         this._code += "}\n"
+    }
+
+    private containList(beans: BeanNode[]): boolean {
+        var hasList = false;
+        for (var i = 0; i < beans.length; i++) {
+            for (var j = 0; j < beans[i].attList.length; j++) {
+                if (beans[i].attList[j].isList) {
+                    hasList = true;
+                    break;
+                }
+            }
+            if (hasList) {
+                break;
+            }
+        }
+        return hasList;
     }
 }

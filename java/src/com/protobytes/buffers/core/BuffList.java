@@ -28,7 +28,7 @@ public class BuffList extends BuffBase implements IBuffList {
 	public String toString() {
 		String str = "";
 		str += "(" + BuffType.getTypeName(this.getType()) + ")" + this.getKey() + "[\n";
-		for (var i = 0; i < this.items.size() - 1; i++) {
+		for (int i = 0; i < this.items.size() - 1; i++) {
 			str += BuffLogUtil.formatLog(this.items.get(i).toString() + ",", 1);
 		}
 		if (this.items.size() > 0) {

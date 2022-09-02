@@ -17,11 +17,11 @@ public class BuffUByte extends BuffBase {
 
 	public void setValue(Object value) {
 		this.value = (Integer) value;
-		if (this.value < 0 || this.value > Byte.MAX_VALUE - Byte.MAX_VALUE)
+		if (this.value < 0 || this.value > Byte.MAX_VALUE - Byte.MIN_VALUE)
 			System.err.println("BuffUByte 的值超出了 0 到 255 的范围");
 	}
 
 	public int getType() {
-		return BuffType.BYTE;
+		return BuffType.UNSIGNED_BYTE;
 	}
 }
