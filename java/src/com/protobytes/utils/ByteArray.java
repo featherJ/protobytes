@@ -16,11 +16,11 @@ public class ByteArray {
 	private String endian = Endian.BIG_ENDIAN;
 
 	public ByteArray() {
-		byteList = new ByteList(20000);
+		byteList = new ByteList(512);
 	}
 
 	public ByteArray(byte[] bytes) {
-		byteList = new ByteList(bytes, 20000);
+		byteList = new ByteList(bytes, 512);
 	}
 
 	/**
@@ -188,6 +188,17 @@ public class ByteArray {
 		byte[] sourceBytes = this.readBytes(length);
 		bytes.byteList.setRange(offset, sourceBytes);
 	}
+//	public void readBytes(ByteArray bytes, int offset, int length) {
+//		if (bytes == null) {
+//			return;
+//		}
+//		if (length == 0) {
+//			length = this.getBytesAvailable();
+//		}
+//		this.validate(length);
+//		byteList.copyTo(position, bytes.byteList, offset, length);
+//		this.position += length;
+//	}
 
 	/**
 	 * Reads a sequence of UTF-8 bytes specified by the length parameter from the
@@ -233,6 +244,19 @@ public class ByteArray {
 		byte[] sourceBytes = bytes.byteList.getRange(offset, writeLength);
 		writeBytes(sourceBytes);
 	}
+	
+//	public void writeBytes2(ByteArray bytes, int offset, int length) {
+//		int writeLength = 0;
+//		if (length < 0) {
+//			return;
+//		} else if (length == 0) {
+//			writeLength = bytes.getLength() - offset;
+//		} else {
+//			writeLength = Math.min(bytes.getLength() - offset, length);
+//		}
+//		bytes.byteList.copyTo(offset, byteList, position, writeLength);
+//		this.position += writeLength;
+//	}
 
 	/**
 	 * Writes a sequence of length bytes from the specified byte array, bytes,
@@ -579,15 +603,6 @@ public class ByteArray {
 	}
 
 	public String toString() {
-		String string = "";
-		string += "[";
-		for (int i = 0; i < byteList.getLength(); i++) {
-			string += byteList.get(i);
-			if (i != byteList.getLength() - 1) {
-				string += ",";
-			}
-		}
-		string += "]";
-		return string;
+		return byteList.toString();
 	}
 }

@@ -224,6 +224,7 @@ public class ExampleInfo {
 		buff.addAttribute(BuffListConverter.getInstance().attInfoListToBuff(info.attInfo1ListProp, "attInfo1ListProp"));
 		buff.addAttribute(BuffListConverter.getInstance().attInfoListToBuff(info.attInfo2ListProp, "attInfo2ListProp"));
 		ByteArray bytes = BuffBytesUtil.toBytes(buff);
-		return bytes.getBytes();
+		byte[] result = bytes.getBytes();
+		return result;
 	}
 }
