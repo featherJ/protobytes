@@ -2,20 +2,6 @@ import { BeanNode } from "../../tree/bean";
 import { IBeanCodeGenerator, IBeansCodeGenerator, ICodeGenerator } from "../commons";
 import { JavaCodeGenerator } from "./commons";
 
-// export class JavaIVOGenerator extends JavaCodeGenerator implements ICodeGenerator {
-//     public decode(): void {
-//         this._name = "IProtoVO";
-//         this._code = "package " + (this._packageDes ? this._packageDes + "." : "");
-//         this._code += "messages.infoVO;\n";
-//         this._code += "\n";
-//         this._code += "import java.io.Serializable;\n";
-//         this._code += "\n";
-//         this._code += this.getDocHelper().getClassDoc("协议生成所有实体类接口 ", 0, this._author);
-//         this._code += this.getDocHelper().getIndent(0) + "public interface IProtoVO extends Serializable {\n";
-//         this._code += "}\n";
-//     }
-// }
-
 export class JavaVOGenerator extends JavaCodeGenerator implements IBeanCodeGenerator {
     public decode(bean: BeanNode): void {
         this._name = bean.name.charAt(0).toLocaleUpperCase() + bean.name.slice(1);
@@ -72,6 +58,7 @@ export class JavaVOGenerator extends JavaCodeGenerator implements IBeanCodeGener
         this._code += this.getDocHelper().getIndent(2) +"byteArray.setPosition(0);\n";
         this._code += this.getDocHelper().getIndent(2) + this._name + " info = new " + this._name + "();\n";
         this._code += this.getDocHelper().getIndent(2) + "BuffObject buff = (BuffObject) BuffBytesUtil.fromBytes(byteArray);\n";
+        this._code += this.getDocHelper().getIndent(2) + "byteArray.clear();\n";
         this._code += this.getDocHelper().getIndent(2) + "List<IBuffInfo> atts = buff.getAttributes();\n";
         for (var j = 0; j < bean.attList.length; j++) {
             this._code += this.getDocHelper().getIndent(2) + "if (" + j + " < atts.size())\n";
@@ -114,8 +101,10 @@ export class JavaVOGenerator extends JavaCodeGenerator implements IBeanCodeGener
             }
         }
 
-        this._code += this.getDocHelper().getIndent(2) + "ByteArray bytes = BuffBytesUtil.toBytes(buff);\n";
-        this._code += this.getDocHelper().getIndent(2) + "return bytes.getBytes();\n";
+        this._code += this.getDocHelper().getIndent(2) + "ByteArray byteArray = BuffBytesUtil.toBytes(buff);\n";
+        this._code += this.getDocHelper().getIndent(2) + "byte[] bytes = byteArray.getBytes();\n";
+        this._code += this.getDocHelper().getIndent(2) + "byteArray.clear();\n";
+        this._code += this.getDocHelper().getIndent(2) + "return bytes;\n";
         this._code += this.getDocHelper().getIndent(1) + "}\n";
 
         this._code += "}\n";
