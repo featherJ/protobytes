@@ -1,3 +1,7 @@
+## 0.9.3
+
+* Fix unsigned type errors.
+
 ## 0.9.2
 
 * Add ubyte, ushort, uint support.
