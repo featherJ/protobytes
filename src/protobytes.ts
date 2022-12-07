@@ -11,7 +11,7 @@ import { readFile } from "./utils/files";
 program
     .name('protobytes')
     .description('CLI for compiling proto files to specified languages.')
-    .version('0.9.0')
+    .version('0.9.5')
     .on('--help', () => {
         console.log('');
         console.log('Examples:');
