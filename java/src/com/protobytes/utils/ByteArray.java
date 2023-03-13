@@ -302,7 +302,7 @@ public class ByteArray {
 		this.position += 8;
 		return value;
 	}
-
+	
 	/**
 	 * Writes a 64-bit long to the byte stream.
 	 * 
@@ -310,12 +310,12 @@ public class ByteArray {
 	 */
 	public void writeLong(long value) {
 		if (this.endian.equals(Endian.BIG_ENDIAN)) {
-			for (int i = 0; i < 8; i++) {
+			for (int i = 7; i >= 0; i--) {
 				this.set(this.position + i, (byte) (value & 0xFF));
 				value >>= 8;
 			}
 		} else {
-			for (int i = 7; i >= 0; i--) {
+			for (int i = 0; i < 8; i++) {
 				this.set(this.position + i, (byte) (value & 0xFF));
 				value >>= 8;
 			}

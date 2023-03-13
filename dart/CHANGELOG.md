@@ -1,3 +1,7 @@
+## 0.9.5
+
+* Fix the bug of writing double data error
+
 ## 0.9.3
 
 * Fix unsigned type errors.
