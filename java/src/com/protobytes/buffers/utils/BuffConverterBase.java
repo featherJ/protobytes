@@ -6,6 +6,7 @@ import com.protobytes.buffers.core.BuffBytes;
 import com.protobytes.buffers.core.BuffDouble;
 import com.protobytes.buffers.core.BuffFloat;
 import com.protobytes.buffers.core.BuffInt;
+import com.protobytes.buffers.core.BuffInt64;
 import com.protobytes.buffers.core.BuffLongString;
 import com.protobytes.buffers.core.BuffShort;
 import com.protobytes.buffers.core.BuffString;
@@ -103,6 +104,19 @@ public class BuffConverterBase {
 
 	public BuffUInt uintToBuff(Long target, String key) {
 		BuffUInt buff = new BuffUInt();
+		buff.setKey(key);
+		buff.setValue(target);
+		return buff;
+	}
+	
+	public Long int64FromBuff(String key, IBuffInfo buff) {
+		buff.setKey(key);
+		Long target = (Long) buff.getValue();
+		return target;
+	}
+
+	public BuffInt64 int64ToBuff(Long target, String key) {
+		BuffInt64 buff = new BuffInt64();
 		buff.setKey(key);
 		buff.setValue(target);
 		return buff;

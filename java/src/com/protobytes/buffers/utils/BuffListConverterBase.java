@@ -130,6 +130,25 @@ public class BuffListConverterBase {
 		return buff;
 	}
 
+	public List<Long> int64ListFromBuff(String key, IBuffInfo buff) {
+		buff.setKey(key);
+		List<Long> target = new ArrayList<>();
+		List<IBuffInfo> items = ((BuffList) buff).getItems();
+		for (IBuffInfo item : items)
+			target.add(BuffConverterBase.getInstance().int64FromBuff("", item));
+		return target;
+	}
+
+	public BuffList int64ListToBuff(List<Long> target, String key) {
+		if (target == null)
+			target = new ArrayList<>();
+		BuffList buff = new BuffList();
+		buff.setKey(key);
+		for (Long value : target)
+			buff.push((IBuffInfo) BuffConverterBase.getInstance().int64ToBuff(value, ""));
+		return buff;
+	}
+
 	public List<Double> floatListFromBuff(String key, IBuffInfo buff) {
 		buff.setKey(key);
 		List<Double> target = new ArrayList<>();

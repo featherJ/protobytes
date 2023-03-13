@@ -8,6 +8,7 @@ public class Main {
 		info.shortProp = 2;
 		info.doubleProp = Math.PI;
 		info.longstringProp = "hello word";
+		info.int64Prop = 1678692045823l;
 		info.intListProp.add(1);
 		info.intListProp.add(2);
 		info.intListProp.add(3);

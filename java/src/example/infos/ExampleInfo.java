@@ -28,6 +28,10 @@ public class ExampleInfo {
 	 */
 	public int intProp = 0;
 	/**
+	 *  Property of int format. A 64-bit signed integer between -9223372036854775808 and 9223372036854775807.
+	 */
+	public long int64Prop = 0l;
+	/**
 	 *  Property of byte format. A 8-bit unsigned integer between 0 and 255.
 	 */
 	public int ubyteProp = 0;
@@ -96,6 +100,10 @@ public class ExampleInfo {
 	 */
 	public List<Long> uintListProp = new ArrayList<Long>();
 	/**
+	 *  Int64 list property.
+	 */
+	public List<Long> int64ListProp = new ArrayList<Long>();
+	/**
 	 *  Float list property.
 	 */
 	public List<Double> floatListProp = new ArrayList<Double>();
@@ -133,6 +141,7 @@ public class ExampleInfo {
 		byteArray.setPosition(0);
 		ExampleInfo info = new ExampleInfo();
 		BuffObject buff = (BuffObject) BuffBytesUtil.fromBytes(byteArray);
+		byteArray.clear();
 		List<IBuffInfo> atts = buff.getAttributes();
 		if (0 < atts.size())
 			info.byteProp = BuffConverter.getInstance().byteFromBuff("byteProp", atts.get(0));
@@ -141,55 +150,59 @@ public class ExampleInfo {
 		if (2 < atts.size())
 			info.intProp = BuffConverter.getInstance().intFromBuff("intProp", atts.get(2));
 		if (3 < atts.size())
-			info.ubyteProp = BuffConverter.getInstance().ubyteFromBuff("ubyteProp", atts.get(3));
+			info.int64Prop = BuffConverter.getInstance().int64FromBuff("int64Prop", atts.get(3));
 		if (4 < atts.size())
-			info.ushortProp = BuffConverter.getInstance().ushortFromBuff("ushortProp", atts.get(4));
+			info.ubyteProp = BuffConverter.getInstance().ubyteFromBuff("ubyteProp", atts.get(4));
 		if (5 < atts.size())
-			info.uintProp = BuffConverter.getInstance().uintFromBuff("uintProp", atts.get(5));
+			info.ushortProp = BuffConverter.getInstance().ushortFromBuff("ushortProp", atts.get(5));
 		if (6 < atts.size())
-			info.floatProp = BuffConverter.getInstance().floatFromBuff("floatProp", atts.get(6));
+			info.uintProp = BuffConverter.getInstance().uintFromBuff("uintProp", atts.get(6));
 		if (7 < atts.size())
-			info.doubleProp = BuffConverter.getInstance().doubleFromBuff("doubleProp", atts.get(7));
+			info.floatProp = BuffConverter.getInstance().floatFromBuff("floatProp", atts.get(7));
 		if (8 < atts.size())
-			info.boolProp = BuffConverter.getInstance().boolFromBuff("boolProp", atts.get(8));
+			info.doubleProp = BuffConverter.getInstance().doubleFromBuff("doubleProp", atts.get(8));
 		if (9 < atts.size())
-			info.stringProp = BuffConverter.getInstance().stringFromBuff("stringProp", atts.get(9));
+			info.boolProp = BuffConverter.getInstance().boolFromBuff("boolProp", atts.get(9));
 		if (10 < atts.size())
-			info.longstringProp = BuffConverter.getInstance().longstringFromBuff("longstringProp", atts.get(10));
+			info.stringProp = BuffConverter.getInstance().stringFromBuff("stringProp", atts.get(10));
 		if (11 < atts.size())
-			info.bytesProp = BuffConverter.getInstance().bytesFromBuff("bytesProp", atts.get(11));
+			info.longstringProp = BuffConverter.getInstance().longstringFromBuff("longstringProp", atts.get(11));
 		if (12 < atts.size())
-			info.att1Prop = BuffConverter.getInstance().attInfoFromBuff("att1Prop", atts.get(12));
+			info.bytesProp = BuffConverter.getInstance().bytesFromBuff("bytesProp", atts.get(12));
 		if (13 < atts.size())
-			info.att2Prop = BuffConverter.getInstance().attInfoFromBuff("att2Prop", atts.get(13));
+			info.att1Prop = BuffConverter.getInstance().attInfoFromBuff("att1Prop", atts.get(13));
 		if (14 < atts.size())
-			info.byteListProp = BuffListConverter.getInstance().byteListFromBuff("byteListProp", atts.get(14));
+			info.att2Prop = BuffConverter.getInstance().attInfoFromBuff("att2Prop", atts.get(14));
 		if (15 < atts.size())
-			info.shortListProp = BuffListConverter.getInstance().shortListFromBuff("shortListProp", atts.get(15));
+			info.byteListProp = BuffListConverter.getInstance().byteListFromBuff("byteListProp", atts.get(15));
 		if (16 < atts.size())
-			info.intListProp = BuffListConverter.getInstance().intListFromBuff("intListProp", atts.get(16));
+			info.shortListProp = BuffListConverter.getInstance().shortListFromBuff("shortListProp", atts.get(16));
 		if (17 < atts.size())
-			info.ubyteListProp = BuffListConverter.getInstance().ubyteListFromBuff("ubyteListProp", atts.get(17));
+			info.intListProp = BuffListConverter.getInstance().intListFromBuff("intListProp", atts.get(17));
 		if (18 < atts.size())
-			info.ushortListProp = BuffListConverter.getInstance().ushortListFromBuff("ushortListProp", atts.get(18));
+			info.ubyteListProp = BuffListConverter.getInstance().ubyteListFromBuff("ubyteListProp", atts.get(18));
 		if (19 < atts.size())
-			info.uintListProp = BuffListConverter.getInstance().uintListFromBuff("uintListProp", atts.get(19));
+			info.ushortListProp = BuffListConverter.getInstance().ushortListFromBuff("ushortListProp", atts.get(19));
 		if (20 < atts.size())
-			info.floatListProp = BuffListConverter.getInstance().floatListFromBuff("floatListProp", atts.get(20));
+			info.uintListProp = BuffListConverter.getInstance().uintListFromBuff("uintListProp", atts.get(20));
 		if (21 < atts.size())
-			info.doubleListProp = BuffListConverter.getInstance().doubleListFromBuff("doubleListProp", atts.get(21));
+			info.int64ListProp = BuffListConverter.getInstance().int64ListFromBuff("int64ListProp", atts.get(21));
 		if (22 < atts.size())
-			info.boolListProp = BuffListConverter.getInstance().boolListFromBuff("boolListProp", atts.get(22));
+			info.floatListProp = BuffListConverter.getInstance().floatListFromBuff("floatListProp", atts.get(22));
 		if (23 < atts.size())
-			info.stringListProp = BuffListConverter.getInstance().stringListFromBuff("stringListProp", atts.get(23));
+			info.doubleListProp = BuffListConverter.getInstance().doubleListFromBuff("doubleListProp", atts.get(23));
 		if (24 < atts.size())
-			info.longstringListProp = BuffListConverter.getInstance().longstringListFromBuff("longstringListProp", atts.get(24));
+			info.boolListProp = BuffListConverter.getInstance().boolListFromBuff("boolListProp", atts.get(24));
 		if (25 < atts.size())
-			info.bytesListProp = BuffListConverter.getInstance().bytesListFromBuff("bytesListProp", atts.get(25));
+			info.stringListProp = BuffListConverter.getInstance().stringListFromBuff("stringListProp", atts.get(25));
 		if (26 < atts.size())
-			info.attInfo1ListProp = BuffListConverter.getInstance().attInfoListFromBuff("attInfo1ListProp", atts.get(26));
+			info.longstringListProp = BuffListConverter.getInstance().longstringListFromBuff("longstringListProp", atts.get(26));
 		if (27 < atts.size())
-			info.attInfo2ListProp = BuffListConverter.getInstance().attInfoListFromBuff("attInfo2ListProp", atts.get(27));
+			info.bytesListProp = BuffListConverter.getInstance().bytesListFromBuff("bytesListProp", atts.get(27));
+		if (28 < atts.size())
+			info.attInfo1ListProp = BuffListConverter.getInstance().attInfoListFromBuff("attInfo1ListProp", atts.get(28));
+		if (29 < atts.size())
+			info.attInfo2ListProp = BuffListConverter.getInstance().attInfoListFromBuff("attInfo2ListProp", atts.get(29));
 		return info;
 	}
 
@@ -198,6 +211,7 @@ public class ExampleInfo {
 		buff.addAttribute(BuffConverter.getInstance().byteToBuff(info.byteProp, "byteProp"));
 		buff.addAttribute(BuffConverter.getInstance().shortToBuff(info.shortProp, "shortProp"));
 		buff.addAttribute(BuffConverter.getInstance().intToBuff(info.intProp, "intProp"));
+		buff.addAttribute(BuffConverter.getInstance().int64ToBuff(info.int64Prop, "int64Prop"));
 		buff.addAttribute(BuffConverter.getInstance().ubyteToBuff(info.ubyteProp, "ubyteProp"));
 		buff.addAttribute(BuffConverter.getInstance().ushortToBuff(info.ushortProp, "ushortProp"));
 		buff.addAttribute(BuffConverter.getInstance().uintToBuff(info.uintProp, "uintProp"));
@@ -215,6 +229,7 @@ public class ExampleInfo {
 		buff.addAttribute(BuffListConverter.getInstance().ubyteListToBuff(info.ubyteListProp, "ubyteListProp"));
 		buff.addAttribute(BuffListConverter.getInstance().ushortListToBuff(info.ushortListProp, "ushortListProp"));
 		buff.addAttribute(BuffListConverter.getInstance().uintListToBuff(info.uintListProp, "uintListProp"));
+		buff.addAttribute(BuffListConverter.getInstance().int64ListToBuff(info.int64ListProp, "int64ListProp"));
 		buff.addAttribute(BuffListConverter.getInstance().floatListToBuff(info.floatListProp, "floatListProp"));
 		buff.addAttribute(BuffListConverter.getInstance().doubleListToBuff(info.doubleListProp, "doubleListProp"));
 		buff.addAttribute(BuffListConverter.getInstance().boolListToBuff(info.boolListProp, "boolListProp"));
@@ -223,8 +238,9 @@ public class ExampleInfo {
 		buff.addAttribute(BuffListConverter.getInstance().bytesListToBuff(info.bytesListProp, "bytesListProp"));
 		buff.addAttribute(BuffListConverter.getInstance().attInfoListToBuff(info.attInfo1ListProp, "attInfo1ListProp"));
 		buff.addAttribute(BuffListConverter.getInstance().attInfoListToBuff(info.attInfo2ListProp, "attInfo2ListProp"));
-		ByteArray bytes = BuffBytesUtil.toBytes(buff);
-		byte[] result = bytes.getBytes();
-		return result;
+		ByteArray byteArray = BuffBytesUtil.toBytes(buff);
+		byte[] bytes = byteArray.getBytes();
+		byteArray.clear();
+		return bytes;
 	}
 }

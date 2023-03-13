@@ -10,6 +10,7 @@ import com.protobytes.buffers.core.BuffDouble;
 import com.protobytes.buffers.core.BuffFloat;
 import com.protobytes.buffers.core.BuffInt;
 import com.protobytes.buffers.core.BuffList;
+import com.protobytes.buffers.core.BuffInt64;
 import com.protobytes.buffers.core.BuffLongString;
 import com.protobytes.buffers.core.BuffObject;
 import com.protobytes.buffers.core.BuffShort;
@@ -50,6 +51,8 @@ public class BuffBytesUtil {
 			bytes.writeInt((int) buff.getValue());
 		} else if (buff.getType() == BuffType.UNSIGNED_INT) {
 			bytes.writeUnsignedInt((long) buff.getValue());
+		} else if (buff.getType() == BuffType.INT64) {
+			bytes.writeLong((long) buff.getValue());
 		} else if (buff.getType() == BuffType.FLOAT) {
 			bytes.writeFloat((double) buff.getValue());
 		} else if (buff.getType() == BuffType.DOUBLE) {
@@ -114,6 +117,9 @@ public class BuffBytesUtil {
 		} else if (type == BuffType.UNSIGNED_INT) {
 			buff = new BuffUInt();
 			buff.setValue(bytes.readUnsignedInt());
+		} else if (type == BuffType.INT64) {
+			buff = new BuffInt64();
+			buff.setValue(bytes.readLong());
 		} else if (type == BuffType.FLOAT) {
 			buff = new BuffFloat();
 			buff.setValue(bytes.readFloat());

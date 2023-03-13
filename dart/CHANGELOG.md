@@ -1,3 +1,7 @@
+## 0.9.6
+
+* Add the support of int64.
+
 ## 0.9.5
 
 * Fix the bug of writing double data error

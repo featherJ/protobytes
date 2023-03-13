@@ -66,6 +66,12 @@ public class BuffType {
 	 * with an int indicating the length in bytes.
 	 */
 	public static final int LONG_STRING = 13;
+	/**
+	 * A 64-bit signed integer between -9223372036854775808 and 9223372036854775807.
+	 */
+	public static final int INT64 = 14;
+	
+	
 
 	public static String getTypeName(int type) {
 		String typeName = "-";
@@ -98,6 +104,8 @@ public class BuffType {
 			return "bytes";
 		case LONG_STRING:
 			return "longstring";
+		case INT64:
+			return "int64";
 		}
 		return typeName;
 	}

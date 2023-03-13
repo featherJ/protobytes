@@ -35,6 +35,7 @@ public class AttInfo {
 		byteArray.setPosition(0);
 		AttInfo info = new AttInfo();
 		BuffObject buff = (BuffObject) BuffBytesUtil.fromBytes(byteArray);
+		byteArray.clear();
 		List<IBuffInfo> atts = buff.getAttributes();
 		if (0 < atts.size())
 			info.attId = BuffConverter.getInstance().shortFromBuff("attId", atts.get(0));
@@ -53,7 +54,9 @@ public class AttInfo {
 		buff.addAttribute(BuffConverter.getInstance().stringToBuff(info.attName, "attName"));
 		buff.addAttribute(BuffConverter.getInstance().stringToBuff(info.attDesc, "attDesc"));
 		buff.addAttribute(BuffConverter.getInstance().intToBuff(info.attValue, "attValue"));
-		ByteArray bytes = BuffBytesUtil.toBytes(buff);
-		return bytes.getBytes();
+		ByteArray byteArray = BuffBytesUtil.toBytes(buff);
+		byte[] bytes = byteArray.getBytes();
+		byteArray.clear();
+		return bytes;
 	}
 }

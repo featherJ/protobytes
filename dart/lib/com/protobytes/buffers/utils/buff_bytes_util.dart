@@ -24,6 +24,8 @@ class BuffBytesUtil {
       bytes.writeInt(buff.value as int);
     } else if (buff.type == BuffType.unsignedIntType) {
       bytes.writeUnsignedInt(buff.value as int);
+    } else if (buff.type == BuffType.int64Type) {
+      bytes.writeInt64(buff.value as int);
     } else if (buff.type == BuffType.floatType) {
       bytes.writeFloat(buff.value as double);
     } else if (buff.type == BuffType.doubleType) {
@@ -84,6 +86,9 @@ class BuffBytesUtil {
     } else if (type == BuffType.unsignedIntType) {
       buff = BuffUInt();
       buff.value = bytes.readUnsignedInt();
+    } else if (type == BuffType.int64Type) {
+      buff = BuffInt64();
+      buff.value = bytes.readInt64();
     } else if (type == BuffType.floatType) {
       buff = BuffFloat();
       buff.value = bytes.readFloat();

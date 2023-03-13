@@ -193,6 +193,21 @@ class ByteArray extends Object {
     _position += 4;
   }
 
+  /// Reads a signed 64-bit integer from the byte stream.
+  int readInt64() {
+    _validate(8);
+    int value = _getData().getInt64(_position, endian);
+    _position += 8;
+    return value;
+  }
+
+  /// Writes a 64-bit signed integer to the byte stream.
+  void writeInt64(int value) {
+    _validateBuffer(8);
+    _getData().setInt64(_position, value, endian);
+    _position += 8;
+  }
+
   /// Reads a signed 16-bit integer from the byte stream.
   int readShort() {
     _validate(2);
@@ -229,6 +244,21 @@ class ByteArray extends Object {
     _validateBuffer(4);
     _getData().setUint32(_position, value, endian);
     _position += 4;
+  }
+
+  /// Reads an unsigned 64-bit integer from the byte stream.
+  int readUnsignedInt64() {
+    _validate(8);
+    int value = _getData().getUint64(_position, endian);
+    _position += 8;
+    return value;
+  }
+
+  /// Writes a 64-bit unsigned integer to the byte stream.
+  void writeUnsignedInt64(int value) {
+    _validateBuffer(8);
+    _getData().setUint64(_position, value, endian);
+    _position += 8;
   }
 
   /// Reads an unsigned 16-bit integer from the byte stream.

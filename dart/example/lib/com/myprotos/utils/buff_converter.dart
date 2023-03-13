@@ -28,79 +28,85 @@ class BuffConverter extends BuffConverterBase {
 			target.intProp = BuffConverter.instance.intFromBuff("intProp", atts[2]);
 		}
 		if (3 < atts.length) {
-			target.ubyteProp = BuffConverter.instance.ubyteFromBuff("ubyteProp", atts[3]);
+			target.int64Prop = BuffConverter.instance.int64FromBuff("int64Prop", atts[3]);
 		}
 		if (4 < atts.length) {
-			target.ushortProp = BuffConverter.instance.ushortFromBuff("ushortProp", atts[4]);
+			target.ubyteProp = BuffConverter.instance.ubyteFromBuff("ubyteProp", atts[4]);
 		}
 		if (5 < atts.length) {
-			target.uintProp = BuffConverter.instance.uintFromBuff("uintProp", atts[5]);
+			target.ushortProp = BuffConverter.instance.ushortFromBuff("ushortProp", atts[5]);
 		}
 		if (6 < atts.length) {
-			target.floatProp = BuffConverter.instance.floatFromBuff("floatProp", atts[6]);
+			target.uintProp = BuffConverter.instance.uintFromBuff("uintProp", atts[6]);
 		}
 		if (7 < atts.length) {
-			target.doubleProp = BuffConverter.instance.doubleFromBuff("doubleProp", atts[7]);
+			target.floatProp = BuffConverter.instance.floatFromBuff("floatProp", atts[7]);
 		}
 		if (8 < atts.length) {
-			target.boolProp = BuffConverter.instance.boolFromBuff("boolProp", atts[8]);
+			target.doubleProp = BuffConverter.instance.doubleFromBuff("doubleProp", atts[8]);
 		}
 		if (9 < atts.length) {
-			target.stringProp = BuffConverter.instance.stringFromBuff("stringProp", atts[9]);
+			target.boolProp = BuffConverter.instance.boolFromBuff("boolProp", atts[9]);
 		}
 		if (10 < atts.length) {
-			target.longstringProp = BuffConverter.instance.longstringFromBuff("longstringProp", atts[10]);
+			target.stringProp = BuffConverter.instance.stringFromBuff("stringProp", atts[10]);
 		}
 		if (11 < atts.length) {
-			target.bytesProp = BuffConverter.instance.bytesFromBuff("bytesProp", atts[11]);
+			target.longstringProp = BuffConverter.instance.longstringFromBuff("longstringProp", atts[11]);
 		}
 		if (12 < atts.length) {
-			target.att1Prop = BuffConverter.instance.attInfoFromBuff("att1Prop", atts[12]);
+			target.bytesProp = BuffConverter.instance.bytesFromBuff("bytesProp", atts[12]);
 		}
 		if (13 < atts.length) {
-			target.att2Prop = BuffConverter.instance.attInfoFromBuff("att2Prop", atts[13]);
+			target.att1Prop = BuffConverter.instance.attInfoFromBuff("att1Prop", atts[13]);
 		}
 		if (14 < atts.length) {
-			target.byteListProp = BuffListConverter.instance.byteListFromBuff("byteListProp", atts[14]);
+			target.att2Prop = BuffConverter.instance.attInfoFromBuff("att2Prop", atts[14]);
 		}
 		if (15 < atts.length) {
-			target.shortListProp = BuffListConverter.instance.shortListFromBuff("shortListProp", atts[15]);
+			target.byteListProp = BuffListConverter.instance.byteListFromBuff("byteListProp", atts[15]);
 		}
 		if (16 < atts.length) {
-			target.intListProp = BuffListConverter.instance.intListFromBuff("intListProp", atts[16]);
+			target.shortListProp = BuffListConverter.instance.shortListFromBuff("shortListProp", atts[16]);
 		}
 		if (17 < atts.length) {
-			target.ubyteListProp = BuffListConverter.instance.ubyteListFromBuff("ubyteListProp", atts[17]);
+			target.intListProp = BuffListConverter.instance.intListFromBuff("intListProp", atts[17]);
 		}
 		if (18 < atts.length) {
-			target.ushortListProp = BuffListConverter.instance.ushortListFromBuff("ushortListProp", atts[18]);
+			target.ubyteListProp = BuffListConverter.instance.ubyteListFromBuff("ubyteListProp", atts[18]);
 		}
 		if (19 < atts.length) {
-			target.uintListProp = BuffListConverter.instance.uintListFromBuff("uintListProp", atts[19]);
+			target.ushortListProp = BuffListConverter.instance.ushortListFromBuff("ushortListProp", atts[19]);
 		}
 		if (20 < atts.length) {
-			target.floatListProp = BuffListConverter.instance.floatListFromBuff("floatListProp", atts[20]);
+			target.uintListProp = BuffListConverter.instance.uintListFromBuff("uintListProp", atts[20]);
 		}
 		if (21 < atts.length) {
-			target.doubleListProp = BuffListConverter.instance.doubleListFromBuff("doubleListProp", atts[21]);
+			target.int64ListProp = BuffListConverter.instance.int64ListFromBuff("int64ListProp", atts[21]);
 		}
 		if (22 < atts.length) {
-			target.boolListProp = BuffListConverter.instance.boolListFromBuff("boolListProp", atts[22]);
+			target.floatListProp = BuffListConverter.instance.floatListFromBuff("floatListProp", atts[22]);
 		}
 		if (23 < atts.length) {
-			target.stringListProp = BuffListConverter.instance.stringListFromBuff("stringListProp", atts[23]);
+			target.doubleListProp = BuffListConverter.instance.doubleListFromBuff("doubleListProp", atts[23]);
 		}
 		if (24 < atts.length) {
-			target.longstringListProp = BuffListConverter.instance.longstringListFromBuff("longstringListProp", atts[24]);
+			target.boolListProp = BuffListConverter.instance.boolListFromBuff("boolListProp", atts[24]);
 		}
 		if (25 < atts.length) {
-			target.bytesListProp = BuffListConverter.instance.bytesListFromBuff("bytesListProp", atts[25]);
+			target.stringListProp = BuffListConverter.instance.stringListFromBuff("stringListProp", atts[25]);
 		}
 		if (26 < atts.length) {
-			target.attInfo1ListProp = BuffListConverter.instance.attInfoListFromBuff("attInfo1ListProp", atts[26]);
+			target.longstringListProp = BuffListConverter.instance.longstringListFromBuff("longstringListProp", atts[26]);
 		}
 		if (27 < atts.length) {
-			target.attInfo2ListProp = BuffListConverter.instance.attInfoListFromBuff("attInfo2ListProp", atts[27]);
+			target.bytesListProp = BuffListConverter.instance.bytesListFromBuff("bytesListProp", atts[27]);
+		}
+		if (28 < atts.length) {
+			target.attInfo1ListProp = BuffListConverter.instance.attInfoListFromBuff("attInfo1ListProp", atts[28]);
+		}
+		if (29 < atts.length) {
+			target.attInfo2ListProp = BuffListConverter.instance.attInfoListFromBuff("attInfo2ListProp", atts[29]);
 		}
 		return target;
 	}
@@ -112,6 +118,7 @@ class BuffConverter extends BuffConverterBase {
 		buff.addAttribute(BuffConverter.instance.byteToBuff(target.byteProp, "byteProp"));
 		buff.addAttribute(BuffConverter.instance.shortToBuff(target.shortProp, "shortProp"));
 		buff.addAttribute(BuffConverter.instance.intToBuff(target.intProp, "intProp"));
+		buff.addAttribute(BuffConverter.instance.int64ToBuff(target.int64Prop, "int64Prop"));
 		buff.addAttribute(BuffConverter.instance.ubyteToBuff(target.ubyteProp, "ubyteProp"));
 		buff.addAttribute(BuffConverter.instance.ushortToBuff(target.ushortProp, "ushortProp"));
 		buff.addAttribute(BuffConverter.instance.uintToBuff(target.uintProp, "uintProp"));
@@ -129,6 +136,7 @@ class BuffConverter extends BuffConverterBase {
 		buff.addAttribute(BuffListConverter.instance.ubyteListToBuff(target.ubyteListProp, "ubyteListProp"));
 		buff.addAttribute(BuffListConverter.instance.ushortListToBuff(target.ushortListProp, "ushortListProp"));
 		buff.addAttribute(BuffListConverter.instance.uintListToBuff(target.uintListProp, "uintListProp"));
+		buff.addAttribute(BuffListConverter.instance.int64ListToBuff(target.int64ListProp, "int64ListProp"));
 		buff.addAttribute(BuffListConverter.instance.floatListToBuff(target.floatListProp, "floatListProp"));
 		buff.addAttribute(BuffListConverter.instance.doubleListToBuff(target.doubleListProp, "doubleListProp"));
 		buff.addAttribute(BuffListConverter.instance.boolListToBuff(target.boolListProp, "boolListProp"));

@@ -42,6 +42,9 @@ class BuffType {
   /// A UTF-8 string from the byte stream. The string is assumed to be prefixed with an int indicating the length in bytes.
   static const int longstringType = 13;
 
+  /// A 64-bit signed integer between -9223372036854775808 and 9223372036854775807.
+  static const int int64Type = 14;
+
   static String getTypeName(int type) {
     String typeName = "-";
     switch (type) {
@@ -73,6 +76,8 @@ class BuffType {
         return "bytes";
       case longstringType:
         return "longstring";
+      case int64Type:
+        return "int64";
     }
     return typeName;
   }

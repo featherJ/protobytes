@@ -89,6 +89,19 @@ class BuffConverterBase {
     return buff;
   }
 
+  int int64FromBuff(String key, IBuffInfo buff) {
+    buff.key = key;
+    int target = buff.value as int;
+    return target;
+  }
+
+  BuffInt64 int64ToBuff(int target, String key) {
+    BuffInt64 buff = BuffInt64();
+    buff.key = key;
+    buff.value = target;
+    return buff;
+  }
+
   double floatFromBuff(String key, IBuffInfo buff) {
     buff.key = key;
     double target = buff.value as double;

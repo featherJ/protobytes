@@ -125,6 +125,25 @@ class BuffListConverterBase {
     return buff;
   }
 
+  List<int> int64ListFromBuff(String key, IBuffInfo buff) {
+    buff.key = key;
+    List<int> target = [];
+    List<IBuffInfo> items = (buff as BuffList).items;
+    for (var item in items) {
+      target.add(BuffConverterBase.instance.int64FromBuff("", item));
+    }
+    return target;
+  }
+
+  BuffList int64ListToBuff(List<int> target, String key) {
+    BuffList buff = BuffList();
+    buff.key = key;
+    for (var value in target) {
+      buff.push(BuffConverterBase.instance.int64ToBuff(value, ""));
+    }
+    return buff;
+  }
+
   List<double> floatListFromBuff(String key, IBuffInfo buff) {
     buff.key = key;
     List<double> target = [];

@@ -136,6 +136,24 @@ class BuffUInt extends BuffBase {
   int get type => BuffType.unsignedIntType;
 }
 
+/// A 64-bit signed integer between -9223372036854775808 and 9223372036854775807.
+class BuffInt64 extends BuffBase {
+  int _value = 0;
+  @override
+  dynamic get value => _value;
+  @override
+  set value(dynamic value) {
+    _value = value as int;
+    if (_value < -9223372036854775808 || _value > 9223372036854775807) {
+      print(
+          "Warning: BuffInt64 的值超出了 -9223372036854775808 到 9223372036854775807 的范围");
+    }
+  }
+
+  @override
+  int get type => BuffType.int64Type;
+}
+
 /// A single-precision (32-bit) floating-point number.
 class BuffFloat extends BuffBase {
   double _value = 0;

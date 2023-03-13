@@ -18,7 +18,7 @@ public class BuffInt extends BuffBase {
 	public void setValue(Object value) {
 		this.value = (Integer) value;
 		if (this.value < Integer.MIN_VALUE || this.value > Integer.MAX_VALUE)
-			System.err.println("BuffInt 的值超出了 -214748364 8到 2147483647 的范围");
+			System.err.println("BuffInt 的值超出了 -2147483648 到 2147483647 的范围");
 	}
 
 	public int getType() {
