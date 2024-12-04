@@ -1,3 +1,7 @@
+## 1.0.0
+
+* Add english support for documentation and comments.
+
 ## 0.9.7
 
 * Add the support of int64.
