@@ -1,12 +1,14 @@
 # Java ProtoBytes library
-用于二进制通信协议序列化与反序列化的底层依赖库。库内容精简，不与任何网络功能关联，只提供数据对象序列化与反序列化功能。
+[中文文档](README_CN.md) | English
 
-对于 ProtoBytes 的详细介绍可以查看：[protobytes](https://github.com/featherJ/protobytes)
+This is the underlying dependency library for binary communication protocol serialization and deserialization. The library is lightweight, with no network-related functionality, and focuses solely on providing data object serialization and deserialization features.
 
-## 使用
-使用 [protobytes](https://github.com/featherJ/protobytes) 创建的协议模板编译得到的 `ExampleInfo` 对象来举例:
+For more detailed information about `ProtoBytes`, please refer to: [protobytes](https://github.com/featherJ/protobytes)
 
-* ExampleInfo 的序列化
+## Usage
+Let's take the `ExampleInfo` object, compiled from the protocol template created by [protobytes](https://github.com/featherJ/protobytes), as an example:
+
+* Serialization of `ExampleInfo`
 ```java
 ExampleInfo info = new ExampleInfo();
 info.byteProp = 1;
@@ -30,11 +32,11 @@ info.attInfo1ListProp.add(attInfo);
 byte[] bytes = ExampleInfo.toBytes(info);
 ```
 
-* ExampleInfo 的反序列化
+* Deserialization of `ExampleInfo`
 ```java
 byte[] bytes = ...;
 ExampleInfo info = ExampleInfo.fromBytes(bytes);
 ```
 
-## 安装
-将 `build` 文件夹下的 `protobytes.jar` 引入到项目中即可。
+## Installation
+Simply include the `protobytes.jar` from the `build` folder into your project.

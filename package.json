@@ -1,6 +1,6 @@
 {
 	"name": "protobytes",
-	"version": "0.9.7",
+	"version": "1.0.0",
 	"description": "A simplified implementation of serialization and deserialization of binary communication protocols: including runtime dependency libraries for each language and command-line compilation tools for protocol files.",
 	"author": "Auga.L",
 	"license": "MIT",

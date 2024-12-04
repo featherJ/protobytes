@@ -1,16 +1,16 @@
 # Flutter proto_bytes library
+[中文文档](README_CN.md) | English
 
 [![pub](https://img.shields.io/pub/v/proto_bytes?color=success)](https://pub.dev/packages/proto_bytes)
 
+This is the underlying dependency library for binary communication protocol serialization and deserialization. The library is lightweight, with no network-related functionality, and focuses solely on providing data object serialization and deserialization features.
 
-用于二进制通信协议序列化与反序列化的底层依赖库。库内容精简，不与任何网络功能关联，只提供数据对象序列化与反序列化功能。
+For more detailed information about `ProtoBytes`, please refer to: [protobytes](https://github.com/featherJ/protobytes)
 
-对于 ProtoBytes 的详细介绍可以查看：[protobytes](https://github.com/featherJ/protobytes)
+## Usage
+Let's take the `ExampleInfo` object, compiled from the protocol template created by [protobytes](https://github.com/featherJ/protobytes), as an example:
 
-## 使用
-使用 [protobytes](https://github.com/featherJ/protobytes) 创建的协议模板编译得到的 `ExampleInfo` 对象来举例:
-
-* ExampleInfo 的序列化
+* Serialization of `ExampleInfo`
 ```dart
 ExampleInfo info = ExampleInfo();
 info.byteProp = 1;
@@ -30,7 +30,7 @@ info.attInfo1ListProp.add(attInfo);
 List<int> bytes = ExampleInfo.toBytes(info);
 ```
 
-* ExampleInfo 的反序列化
+* Deserialization of `ExampleInfo`
 ```dart
 List<int> bytes = ...;
 ExampleInfo info = ExampleInfo.fromBytes(bytes);
